@@ -1,4 +1,7 @@
 class CompetitionsController < ApplicationController
+  before_action :set_competition, only: [:edit, :update, :show, :destroy]
+
+
   def index
     @competitions = Competition.all
   end
@@ -8,7 +11,7 @@ class CompetitionsController < ApplicationController
   end
 
   def edit
-    @competition = Competition.find(params[:id])
+
   end
 
   def create
@@ -22,7 +25,7 @@ class CompetitionsController < ApplicationController
   end
 
   def update
-    if @competition.update(article_params)
+    if @competition.update(competition_params)
       flash[:notice] = "Competicion actualizada correctamente"
       redirect_to competition_path(@competition)
     else
@@ -31,21 +34,20 @@ class CompetitionsController < ApplicationController
   end
 
   def show
-    @competition = Competition.find(params[:id])
+
   end
 
   def destroy
-    @competition = Competition.find(params[:id])
-    if @competition.destroy
-      flash[:notice] = "Competicion eliminada correctamente"
-      redirect_to competitions_path
-    else
-      render 'index'
-    end
+    @competition.destroy
+    flash[:notice] = "Competicion eliminada correctamente"
+    redirect_to competitions_path
   end
 
 
   private
+  def set_competition
+    @competition = Competition.find(params[:id])
+  end
   def competition_params
     params.require(:competition).permit(:titulo, :descripcion, :premio,
       :deadline, :dificultad)
