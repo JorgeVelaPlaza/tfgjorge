@@ -1,7 +1,7 @@
-<h1>Nueva competición</h1>
+<h1>Editar competición</h1>
 
 <% if @competition.errors.any? %>
-  <h3>No se puede crear la competición debido a los siguientes errores:</h3>
+  <h3>No se puede actualizar la competición debido a los siguientes errores:</h3>
   <ul>
     <% @competition.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
@@ -33,7 +33,7 @@
   </p>
   <p>
     <br>
-    <%= f.submit 'Crear competicion' %>
+    <%= f.submit 'Actualizar competicion' %>
   </p>
 
 <% end %>

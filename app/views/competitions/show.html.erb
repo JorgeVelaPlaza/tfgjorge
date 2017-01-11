@@ -19,3 +19,6 @@
 <p>
   Fecha final: <%= @competition.deadline %>
 </p>
+
+<%= link_to "Actualizar esta competición", edit_competition_path(@competition) %> |
+<%= link_to "Volver a competiciones activas", competitions_path %>

@@ -1,0 +1,25 @@
+<h1>Competiciones activas</h1>
+<p>
+  <%= link_to "Crear nueva competición", new_competition_path %>
+</p>
+<table>
+  <tr>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>Premio</th>
+    <th>Fecha límite</th>
+    <th>Dificultad</th>
+  </tr>
+  <% @competitions.each do |competition| %>
+  <tr>
+    <td><%= competition.titulo %></td>
+    <td><%= competition.descripcion %></td>
+    <td><%= competition.premio %> €</td>
+    <td><%= competition.deadline %></td>
+    <td><%= competition.dificultad %></td>
+    <td><%= link_to "Editar", edit_competition_path(competition) %></td>
+    <td><%= link_to "Ver", competition_path(competition) %></td>
+  </tr>
+  <% end %>
+
+</table>

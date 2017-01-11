@@ -1,6 +1,14 @@
 class CompetitionsController < ApplicationController
+  def index
+    @competitions = Competition.all
+  end
+
   def new
     @competition = Competition.new
+  end
+
+  def edit
+    @competition = Competition.find(params[:id])
   end
 
   def create
@@ -10,6 +18,15 @@ class CompetitionsController < ApplicationController
       redirect_to competition_path(@competition)
     else
       render 'new'
+    end
+  end
+
+  def update
+    if @competition.update(article_params)
+      flash[:notice] = "Competicion actualizada correctamente"
+      redirect_to competition_path(@competition)
+    else
+      render 'edit'
     end
   end
 
