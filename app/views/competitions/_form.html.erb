@@ -1,0 +1,38 @@
+<% if @competition.errors.any? %>
+  <h3>No se puede crear la competición debido a los siguientes errores:</h3>
+  <ul>
+    <% @competition.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @competition do |f| %>
+  <p>
+    <%= f.label :titulo %> <br>
+    <%= f.text_field :titulo %>
+  </p>
+  <p>
+    <%= f.label :descripcion %> <br>
+    <%= f.text_area :descripcion %>
+  </p>
+  <p>
+    <%= f.label :premio%>(€) <br>
+    <%= f.text_field :premio %>
+  </p>
+  <p>
+    <%= f.label :tiempo_límite %> <br>
+    <%= f.text_field :deadline, id: "datepicker" %>
+  </p>
+
+  <p>
+    <%= f.label :dificultad%> <br>
+    <%= f.select :dificultad, options_for_select(['Fácil', 'Medio', 'Experto']) %>
+  </p>
+  <p>
+    <br>
+    <%= f.submit 'Crear competicion' %>
+  </p>
+
+<% end %>
+<%= link_to "Volver a competiciones activas", competitions_path %>

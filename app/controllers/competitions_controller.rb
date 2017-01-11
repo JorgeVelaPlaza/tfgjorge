@@ -34,6 +34,16 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
 
+  def destroy
+    @competition = Competition.find(params[:id])
+    if @competition.destroy
+      flash[:notice] = "Competicion eliminada correctamente"
+      redirect_to competitions_path
+    else
+      render 'index'
+    end
+  end
+
 
   private
   def competition_params

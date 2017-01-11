@@ -19,6 +19,8 @@
     <td><%= competition.dificultad %></td>
     <td><%= link_to "Editar", edit_competition_path(competition) %></td>
     <td><%= link_to "Ver", competition_path(competition) %></td>
+    <td><%= link_to "Eliminar", competition_path(competition), method: :delete,
+            data: {confirm: "¿Estás seguro?"} %></td>
   </tr>
   <% end %>
 
