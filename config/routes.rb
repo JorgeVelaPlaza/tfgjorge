@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get '/', to: 'pages#home'
+  devise_for :users
+  get 'pages/home', to: 'pages#home'
   get 'pages/about', to: 'pages#about'
-
+  root to:'pages#home'
   resources :competitions
 
   # The priority is based upon order of creation: first created -> highest priority.
