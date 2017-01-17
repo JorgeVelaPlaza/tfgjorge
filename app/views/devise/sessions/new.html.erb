@@ -1,26 +1,50 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>App</b>TFG</a>
   </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Inicia sesión para comenzar</p>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group has-feedback">
+        <%= f.email_field :email, autofocus: true, placeholder: "Email",type: "email", class: "form-control" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <div class="form-group has-feedback">
+        <%= f.password_field :password, autocomplete: "off", type: "password", class: "form-control",
+          placeholder: "Contraseña"%>
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-7">
+          <% if devise_mapping.rememberable? -%>
+          <div class="field iCheck-helper">
+            <%= f.check_box :remember_me %>
+            <%= f.label :recuérdame %>
+          </div>
+          <% end -%>
+        </div>
+        <div class="actions col-xs-5">
+          <%= f.submit "Iniciar sesión", class: "btn btn-primary btn-block btn-flat" %>
+        </div>
+      </div>
+    <% end %>
+    <br>
+    <%= render "devise/shared/links" %>
+
+
+    <div class="social-auth-links text-center">
+      <p>- O -</p>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Inicia sesión con Facebook</a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Inicia sesión con Google+</a>
     </div>
-  <% end -%>
+    <!-- /.social-auth-links -->
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
 
-<%= render "devise/shared/links" %>
+

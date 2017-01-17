@@ -1,27 +1,55 @@
-<h1>Competiciones activas</h1>
+<h1>Competiciones activas</h1><br>
 <p>
-  <%= link_to "Crear nueva competición", new_competition_path %>
-</p>
-<table>
-  <tr>
-    <th>Título</th>
-    <th>Descripción</th>
-    <th>Premio</th>
-    <th>Fecha límite</th>
-    <th>Dificultad</th>
-  </tr>
-  <% @competitions.each do |competition| %>
-  <tr>
-    <td><%= competition.titulo %></td>
-    <td><%= competition.descripcion %></td>
-    <td><%= competition.premio %> €</td>
-    <td><%= competition.deadline %></td>
-    <td><%= competition.dificultad %></td>
-    <td><%= link_to "Editar", edit_competition_path(competition) %></td>
-    <td><%= link_to "Ver", competition_path(competition) %></td>
-    <td><%= link_to "Eliminar", competition_path(competition), method: :delete,
-            data: {confirm: "¿Estás seguro?"} %></td>
-  </tr>
-  <% end %>
+  <%= link_to "Nueva competición", new_competition_path, class: "btn btn-primary centerbtn"%>
+</p><br>
 
 </table>
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Competiciones activas</h3>
+
+    <div class="box-tools">
+      <div class="input-group input-group-sm" style="width: 150px;">
+        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-hover">
+      <tr>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Premio</th>
+        <th>Fecha límite</th>
+        <th>Dificultad</th>
+        <th>Acciones</th>
+      </tr>
+      <% @competitions.each do |competition| %>
+      <tr>
+        <td><%= competition.titulo %></td>
+        <td><%= competition.descripcion %></td>
+        <td><b><%= competition.premio %> €</b></td>
+        <td><%= competition.deadline %></td>
+        <% if competition.dificultad == 'Fácil' %>
+          <td><span class="label label-success"><%= competition.dificultad %></span></td>
+        <% elsif competition.dificultad=="Medio" %>
+          <td><span class="label label-warning"><%= competition.dificultad %></span></td>
+        <% elsif competition.dificutad=="Experto" %>
+          <td><span class="label label-danger"><%= competition.dificultad %></span></td>
+        <% end %>
+        <td><%= link_to "Editar", edit_competition_path(competition) %> |
+        <%= link_to "Ver", competition_path(competition) %> |
+        <%= link_to "Eliminar", competition_path(competition), method: :delete,
+                data: {confirm: "¿Estás seguro?"} %></td>
+      </tr>
+  <% end %>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
