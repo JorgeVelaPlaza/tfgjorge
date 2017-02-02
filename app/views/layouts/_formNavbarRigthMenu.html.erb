@@ -1,0 +1,33 @@
+ <!-- Navbar Right Menu -->
+<div class="navbar-custom-menu ">
+<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+  <ul class="nav navbar-nav ">
+    <!-- User Account Menu -->
+    <li class="dropdown user user-menu">
+      <!-- Menu Toggle Button -->
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        <!-- The user image in the navbar-->
+        <% if current_user.avatar? %>
+          <%= image_tag current_user.avatar.url, class: "user-image", :alt => "User Image" %>
+        <% else %>
+          <%= image_tag "/uploads/usuario_sin_foto.jpg", class: "user-image", :alt => "User Image"%>
+        <% end %>
+        <%#= image_tag("jorgecara.jpg", :alt => "User Image", class: "user-image") %>
+        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+        <% if current_user %>
+          <span class="hidden-xs">Conectado como <b><%= current_user.username %></b></span>
+        <% end%>
+      </a>
+    </li>
+    <li class="dropdown">
+      <a href="#control-sidebar-settings-tab" class="dropdown-toggle"
+      data-toggle="control-sidebar" aria-expanded="false" aria-haspopup="true">
+      <i class="fa fa-gears"></i><b class="caret"></b></a>
+
+    </li>
+    <li role="separator" class="divider">
+    <a></a>
+    </li>
+  </ul>
+  </nav>
+</div>

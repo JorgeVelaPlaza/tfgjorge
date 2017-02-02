@@ -1,0 +1,6 @@
+<h2 class="page-header">Perfil de <%= @user.name %></h2>
+<p><b><%= @user.username %></b></p>
+
+<!-- image_tag("/fotos_usuarios/#{@user.id}/avatar/#{@user.avatar_filename}", class: "img-circle") if @user.avatar_filename?  -->
+<%= image_tag(@user.avatar.url, class: "img-circle imgresize") if @user.avatar? %>
+

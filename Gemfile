@@ -16,16 +16,19 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'jquery-rails', '~> 4.2.1'
+gem 'jquery-ui-rails', '~> 6.0.1'
+gem 'jquery-turbolinks'
 
-#Para instalar adminlte
+# Para instalar adminlte
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 
 source 'https://rails-assets.org/' do
   gem 'rails-assets-adminlte'
 end
+
+gem 'carrierwave'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
