@@ -1,38 +1,40 @@
-<% if @competition.errors.any? %>
-  <h3>No se puede crear la competición debido a los siguientes errores:</h3>
-  <ul>
-    <% @competition.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
+<%= render 'shared/errors', obj: @competition %>
+
+<div class="box box-primary">
+  <%= form_for @competition do |f| %>
+    <form role="form">
+      <div class="box-body">
+        <div class="form-group col-xs-12">
+          <%= f.label :titulo %>
+          <%= f.text_field :titulo, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :descripción %>
+          <%= f.text_area :descripcion, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= f.label :premio %>
+          <%= f.text_field :premio, class: "form-control", placeholder: "€" %>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= f.label :fecha_límite %>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <%= f.text_field :deadline, id: "datepicker", class: "form-control pull-right" %>
+          </div>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= f.label :dificultad %>
+          <%= f.select(:dificultad, options_for_select([['Fácil'], ['Medio'], ['Experto']]), {}, {class: "form-control"}) %>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <%= f.submit "Crear competición", class: "btn btn-primary" %>
+        <%= button_tag "Cancelar", :type => 'button', class: "btn btn-danger" %>
+      </div>
+    </form>
+
 <% end %>
-
-<%= form_for @competition do |f| %>
-  <p>
-    <%= f.label :titulo %> <br>
-    <%= f.text_field :titulo %>
-  </p>
-  <p>
-    <%= f.label :descripcion %> <br>
-    <%= f.text_area :descripcion %>
-  </p>
-  <p>
-    <%= f.label :premio%>(€) <br>
-    <%= f.text_field :premio %>
-  </p>
-  <p>
-    <%= f.label :tiempo_límite %> <br>
-    <%= f.text_field :deadline, id: "datepicker" %>
-  </p>
-
-  <p>
-    <%= f.label :dificultad%> <br>
-    <%= f.select :dificultad, options_for_select(['Fácil', 'Medio', 'Experto']) %>
-  </p>
-  <p>
-    <br>
-    <%= f.submit 'Crear competicion' %>
-  </p>
-
-<% end %>
-<%= link_to "Volver a competiciones activas", competitions_path %>

@@ -1,24 +1,85 @@
-<h1>Mostrando la competición seleccionada</h1>
+<h1><%= @competition.titulo %></h1>
+<h4><span style="float: right;">Finaliza el <%= @competition.deadline.strftime("%d/%m/%Y") %></span></h4><br>
+<br>
 
-<p>
-  Título: <%= @competition.titulo %>
-</p>
+<% if current_user.admin? %>
+  <%= link_to "Actualizar esta competición", edit_competition_path(@competition), class: "btn bg-orange" %>
+  <%= link_to " Volver", competitions_path, class: "btn btn-primary" %>
+<% else %>
+  <% if current_user.is_enroll?(current_user.id, @competition.id) %>
+    <%= link_to "¡Ya estás inscrito!", competition_users_path(:competition_id => @competition.id, :user_id => current_user.id), :method => :post, class: "btn btn-warning disabled" %>
+    <%= link_to " Volver", competitions_path, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "Inscribirse", competition_users_path(:competition_id => @competition.id,
+      :user_id => current_user.id), :method => :post, class: "btn btn-warning" %>
+    <%= link_to " Volver", competitions_path, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
 
-<p>
-  Descripción: <%= @competition.descripcion %>
-</p>
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab_1" data-toggle="tab"><b>Descripción</b></a></li>
+    <li><a href="#tab_2" data-toggle="tab"><b>Datos</b></a></li>
+    <li><a href="#tab_3" data-toggle="tab"><b>Clasificación</b></a></li>
+    <li><a href="#tab_4" data-toggle="tab"><b>Foro de la Competición</b></a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab_1">
+      <div class="container">
+        <div class="col-xs-8">
+          <p><%= markdown(@competition.descripcion) %></p>
+        </div>
+        <div class="col-xs-3">
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Detalles</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-money margin-r-5"></i> Premio:  </strong>
+              <%= @competition.premio %> €
+              <hr>
+              <strong><i class="fa fa-bar-chart margin-r-5"></i> Predicciones: </strong>
+              Próximamente
+              <hr>
+              <strong><i class="fa fa-trophy margin-r-5"></i> Máxima Puntuación: </strong>
+              Próximamente
+              <hr>
+              <strong><i class="fa fa-exclamation-triangle margin-r-5"></i> Dificultad:  </strong>
+              <% if @competition.dificultad == 'Fácil' %>
+                <span class="label label-success"><%= @competition.dificultad %></span>
+              <% elsif @competition.dificultad=="Medio" %>
+                <span class="label label-warning"><%= @competition.dificultad %></span>
+              <% elsif @competition.dificultad=="Experto" %>
+                <span class="label label-danger"><%= @competition.dificultad %></span>
+              <% end %>
+              <hr>
+              <strong><i class="fa fa-download margin-r-5"></i> Descripción: </strong>
+              <%= link_to "Descargar",nil, class: "btn btn-danger btn-xs", style:"color: white;" %>
+              <hr>
+              <strong><i class="fa fa-refresh margin-r-5"></i> Última modificación: </strong>
+              <%= @competition.updated_at.strftime("%d/%m/%Y a las %H:%M") %>
 
-<p>
-  Premio: <%= @competition.premio %> €
-</p>
-
-<p>
-  Dificultad: <%= @competition.dificultad %>
-</p>
-
-<p>
-  Fecha final: <%= @competition.deadline %>
-</p>
-
-<%= link_to "Actualizar esta competición", edit_competition_path(@competition) %> |
-<%= link_to "Volver a competiciones activas", competitions_path %>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </div>
+    <!-- /.tab-pane -->
+    <div class="tab-pane" id="tab_2">
+      Pestaña para descargar los datos de la competición. Más adelante.
+    </div>
+    <!-- /.tab-pane -->
+    <div class="tab-pane" id="tab_3">
+      Pestaña en la que se mostrará la clasificación o estado de la competición, según la modalidad en la que se juegue.
+    </div>
+    <div class="tab-pane" id="tab_4">
+      Pestaña opcional en la que se podrá realizar un foro de dicha competición.
+    </div>
+    <!-- /.tab-pane -->
+  </div>
+  <!-- /.tab-content -->
+</div>

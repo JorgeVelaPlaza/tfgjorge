@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   before_filter :check_for_cancel, :only => [:edit]
   before_filter :check_for_save_changes, :only => [:edit]
 
+  helper_method :is_enroll?(userId, compId)
+
   def show
     @user = User.find(params[:id])
   end
@@ -23,6 +25,9 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+
+
 
   private
 

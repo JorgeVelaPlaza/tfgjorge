@@ -1,0 +1,32 @@
+<% if obj.errors.any? %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="alert alert-alert alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-ban"></i> <%= pluralize(obj.errors.count, " error/es") %> impiden que la competición sea creada o actualizada</h4>
+        <ul>
+          <% obj.errors.full_messages.each do |msg| %>
+            <% if msg == "Titulo can't be blank" %>
+              <% msg = "Titulo no puede estar en blanco" %>
+              <li><%= msg %></li>
+            <% elsif msg == "Titulo is too short (minimum is 3 characters)" %>
+              <% msg = "Titulo es demasiado corto (mínimo 3 caracteres)" %>
+              <li><%= msg %></li>
+            <% elsif msg == "Descripcion can't be blank" %>
+              <% msg = "Descripción no puede estar en blanco" %>
+              <li><%= msg %></li>
+            <% elsif msg == "Premio can't be blank" %>
+              <% msg = "Premio no puede estar en blanco" %>
+              <li><%= msg %></li>
+            <% elsif msg == "Deadline can't be blank" %>
+              <% msg = "Fecha límite no puede estar en blanco" %>
+              <li><%= msg %></li>
+            <% else %>
+              <li><%= msg %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

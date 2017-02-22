@@ -1,3 +1,38 @@
 <h1>Editar competición</h1>
 
-<%= render 'form' %>
+<%= render 'shared/errors', obj: @competition %>
+
+<div class="box box-primary">
+  <%= form_for @competition do |f| %>
+    <form role="form">
+      <div class="box-body">
+        <div class="form-group col-xs-12">
+          <%= f.label :titulo %>
+          <%= f.text_field :titulo, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :descripcion %>
+          <%= f.text_area :descripcion, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= f.label :premio %> (€)
+          <%= f.text_field :premio, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= f.label :tiempo_límite %>
+          <%= f.text_field :deadline, id: "datepicker", class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= f.label :dificultad %>
+          <%= f.select(:dificultad, options_for_select([['Fácil'], ['Medio'], ['Experto']]), {}, {class: "form-control"}) %>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <%= f.submit "Actualizar competición", class: "btn btn-primary" %>
+        <%= button_tag "Cancelar", :type => 'button', class: "btn btn-danger" %>
+      </div>
+    </form>
+
+<% end %>
+

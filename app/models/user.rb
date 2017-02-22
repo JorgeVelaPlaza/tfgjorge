@@ -12,6 +12,17 @@ class User < ActiveRecord::Base
   validates :ciudad, presence: true, length: { minimum: 3, maximum: 100}
   validates :email, presence: true
 
-
   mount_uploader :avatar, AvatarUploader
+
+  def is_enroll?(userId, compId)
+    CompetitionUser.all.each do |i|
+      cu = CompetitionUser.find(i)
+      if (cu.user_id == userId && cu.competition_id == compId)
+        return true
+      else
+        return false
+      end
+    end
+  end
+
 end

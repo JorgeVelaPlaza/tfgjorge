@@ -34,18 +34,22 @@
         <td><%= competition.titulo %></td>
         <td><%= competition.descripcion %></td>
         <td><b><%= competition.premio %> €</b></td>
-        <td><%= competition.deadline %></td>
+        <td><%= competition.deadline.strftime("%d/%m/%Y") %></td>
         <% if competition.dificultad == 'Fácil' %>
           <td><span class="label label-success"><%= competition.dificultad %></span></td>
         <% elsif competition.dificultad=="Medio" %>
           <td><span class="label label-warning"><%= competition.dificultad %></span></td>
-        <% elsif competition.dificutad=="Experto" %>
+        <% elsif competition.dificultad=="Experto" %>
           <td><span class="label label-danger"><%= competition.dificultad %></span></td>
         <% end %>
-        <td><%= link_to "Editar", edit_competition_path(competition) %> |
-        <%= link_to "Ver", competition_path(competition) %> |
-        <%= link_to "Eliminar", competition_path(competition), method: :delete,
-                data: {confirm: "¿Estás seguro?"} %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to "Editar", edit_competition_path(competition), class: "btn btn-primary btn-xs"%>
+          <%= link_to "Ver", competition_path(competition), class: "btn btn-info btn-xs" %>
+          <%= link_to "Eliminar", competition_path(competition), method: :delete,
+                data: {confirm: "¿Estás seguro?"}, class: "btn btn-danger btn-xs" %></td>
+        <% else %>
+        <td><%= link_to "Ver más", competition_path(competition), class: "btn btn-info btn-xs" %></td>
+        <% end %>
       </tr>
   <% end %>
     </table>
