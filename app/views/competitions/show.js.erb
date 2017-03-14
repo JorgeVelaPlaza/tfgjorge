@@ -1,0 +1,16 @@
+if($("#competitionContentMenu li:first-child").hasClass("active")){
+  $('#detailed_competition').html("<%= escape_javascript(render(:partial => '/competitions/tab_overview')) %>")
+}
+if($("#competitionContentMenu li:nth-child(2)").hasClass("active")){
+  $('#detailed_competition').html("<%= escape_javascript(render(:partial => '/competitions/tab_data')) %>")
+}
+if($("#competitionContentMenu li:nth-child(3)").hasClass("active")){
+  $('#detailed_competition').html("<%= escape_javascript(render(:partial => '/competitions/tab_discussion')) %>")
+}
+if($("#competitionContentMenu li:nth-child(4)").hasClass("active")){
+  $('#detailed_competition').html("<%= escape_javascript(render(:partial => '/competitions/tab_leaderboard')) %>")
+}
+if($("#competitionContentMenu li:nth-child(5)").hasClass("active")){
+  $('#detailed_competition').html("<%= escape_javascript(render(:partial => '/competitions/tab_more')) %>")
+}
+

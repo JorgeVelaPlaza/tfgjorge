@@ -1,0 +1,117 @@
+<div id="#overview">
+<ul class="nav nav-tabs">
+<li class="active"><a href="#tab_1" data-toggle="tab"><b>Description</b></a></li>
+<li><a href="#tab_2" data-toggle="tab"><b>Evaluation</b></a></li>
+<li><a href="#tab_3" data-toggle="tab"><b>Prizes</b></a></li>
+<li><a href="#tab_4" data-toggle="tab"><b>About</b></a></li>
+<li><a href="#tab_5" data-toggle="tab"><b>Engagement Contest</b></a></li>
+<li><a href="#tab_6" data-toggle="tab"><b>Resources</b></a></li>
+<li><a href="#tab_7" data-toggle="tab"><b>Timeline</b></a></li>
+<li><a href="#tab_8" data-toggle="tab"><b>Tutorial</b></a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="tab_1">
+  <div class="container">
+    <div class="col-xs-8">
+      <p><%= markdown(@competition.descripcion) %></p>
+    </div>
+    <div class="col-xs-3">
+      <!-- About Me Box -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Details</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <strong><i class="fa fa-money margin-r-5"></i> Prize:  </strong>
+          <%= @competition.premio %> €
+          <hr>
+          <strong><i class="fa fa-bar-chart margin-r-5"></i> Predictions: </strong>
+          Coming soon
+          <hr>
+          <strong><i class="fa fa-trophy margin-r-5"></i> High score: </strong>
+          Coming soon
+          <hr>
+          <strong><i class="fa fa-exclamation-triangle margin-r-5"></i> Difficulty:  </strong>
+          <% if @competition.dificultad == 'Fácil' %>
+            <span class="label label-success"><%= @competition.dificultad %></span>
+          <% elsif @competition.dificultad=="Medio" %>
+            <span class="label label-warning"><%= @competition.dificultad %></span>
+          <% elsif @competition.dificultad=="Experto" %>
+            <span class="label label-danger"><%= @competition.dificultad %></span>
+          <% end %>
+          <hr>
+          <strong><i class="fa fa-download margin-r-5"></i> Description: </strong>
+          <%= link_to "Descargar",nil, class: "btn btn-danger btn-xs", style:"color: white;" %>
+          <hr>
+          <strong><i class="fa fa-refresh margin-r-5"></i> Last update: </strong>
+          <%= @competition.updated_at.strftime("%d/%m/%Y a las %H:%M") %>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_2">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.evaluation) %></p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_3">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.prizes) %></p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_4">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.about) %></p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_5">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.engagement) %></p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_6">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.resources) %></p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_7">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.timeline) %></p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane" id="tab_8">
+  <div class="container">
+    <div class="col-xs-11">
+      <p><%= markdown(@competition.tutorial) %></p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+

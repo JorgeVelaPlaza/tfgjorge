@@ -1,12 +1,12 @@
-<h1>Competiciones activas</h1><br>
+<h1>Competitions</h1><br>
 <p>
-  <%= link_to "Nueva competición", new_competition_path, class: "btn btn-primary centerbtn"%>
+  <%= link_to "New competition", new_competition_path, class: "btn btn-primary centerbtn"%>
 </p><br>
 
 </table>
 <div class="box">
   <div class="box-header">
-    <h3 class="box-title">Competiciones activas</h3>
+    <h3 class="box-title">Active competitions</h3>
 
     <div class="box-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
@@ -22,17 +22,17 @@
   <div class="box-body table-responsive no-padding">
     <table class="table table-hover">
       <tr>
-        <th>Título</th>
-        <th>Descripción</th>
-        <th>Premio</th>
-        <th>Fecha límite</th>
-        <th>Dificultad</th>
-        <th>Acciones</th>
+        <th>Títle</th>
+        <th>Summary</th>
+        <th>Prize</th>
+        <th>Deadline</th>
+        <th>Dificult</th>
+        <th>Actions</th>
       </tr>
       <% @competitions.each do |competition| %>
       <tr>
         <td><%= competition.titulo %></td>
-        <td><%= competition.descripcion %></td>
+        <td><%= competition.summary %></td>
         <td><b><%= competition.premio %> €</b></td>
         <td><%= competition.deadline.strftime("%d/%m/%Y") %></td>
         <% if competition.dificultad == 'Fácil' %>

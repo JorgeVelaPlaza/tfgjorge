@@ -51,7 +51,11 @@ class CompetitionsController < ApplicationController
     redirect_to competitions_path
   end
 
-
+  def overview
+    respond_to do |format|
+      format.js
+    end
+  end
 
   private
   def set_competition

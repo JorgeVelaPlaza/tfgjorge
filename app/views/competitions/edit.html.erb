@@ -1,38 +1,124 @@
-<h1>Editar competición</h1>
+<h3>Edit Competition</h3>
 
 <%= render 'shared/errors', obj: @competition %>
 
-<div class="box box-primary">
-  <%= form_for @competition do |f| %>
+<%= form_for @competition do |f| %>
+  <!-- Details -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Details</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
     <form role="form">
       <div class="box-body">
         <div class="form-group col-xs-12">
-          <%= f.label :titulo %>
+          <%= f.label :title %>
           <%= f.text_field :titulo, class: "form-control" %>
         </div>
         <div class="form-group col-xs-12">
-          <%= f.label :descripcion %>
-          <%= f.text_area :descripcion, class: "form-control" %>
+          <%= f.label :summary %>
+          <%= f.text_field :summary, class: "form-control", placeholder: "A brief introduction of the competition content" %>
         </div>
         <div class="form-group col-xs-6">
-          <%= f.label :premio %> (€)
-          <%= f.text_field :premio, class: "form-control" %>
+          <%= f.label :prize %>
+          <%= f.text_field :premio, class: "form-control", placeholder: "€" %>
         </div>
         <div class="form-group col-xs-6">
-          <%= f.label :tiempo_límite %>
-          <%= f.text_field :deadline, id: "datepicker", class: "form-control" %>
+          <%= f.label :deadline %>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <%= f.text_field :deadline, id: "datepicker", class: "form-control pull-right" %>
+          </div>
         </div>
         <div class="form-group col-xs-6">
-          <%= f.label :dificultad %>
+          <%= f.label :difficulty %>
           <%= f.select(:dificultad, options_for_select([['Fácil'], ['Medio'], ['Experto']]), {}, {class: "form-control"}) %>
         </div>
       </div>
 
       <div class="box-footer">
-        <%= f.submit "Actualizar competición", class: "btn btn-primary" %>
-        <%= button_tag "Cancelar", :type => 'button', class: "btn btn-danger" %>
+        <%= submit_tag "Clear all details", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
       </div>
     </form>
+  </div>
+
+  <!-- Overview -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Overview</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <form role="form">
+      <div class="box-body">
+        <div class="form-group col-xs-12">
+          <%= f.label :description %>
+          <%= f.text_area :descripcion, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :evaluation %>
+          <%= f.text_area :evaluation, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :prizes %>
+          <%= f.text_area :prizes, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :about %>
+          <%= f.text_area :about, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :engagement_contest %>
+          <%= f.text_area :engagement, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :resources %>
+          <%= f.text_area :resources, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :timeline %>
+          <%= f.text_area :timeline, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :tutorial %>
+          <%= f.text_area :tutorial, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <%= submit_tag "Clear all the overview", :class => 'btn btn-info', :type => 'reset'%>
+      </div>
+    </form>
+  </div>
+
+  <!-- More -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">More</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <form role="form">
+      <div class="box-body">
+        <div class="form-group col-xs-12">
+          <%= f.label :rules %>
+          <%= f.text_area :rules, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <%= submit_tag "Clear more", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
+      </div>
+    </form>
+  </div>
+  <%= f.submit "Update competition", class: "btn btn-success" %>
+  <%= button_tag "Cancel", :type => 'button', class: "btn btn-danger" %>
 
 <% end %>
 
