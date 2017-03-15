@@ -5,7 +5,6 @@ set :repo_url, "git@github.com:JorgeVelaPlaza/tfgjorge.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :scm, :git
 set :branch, "master"
 
 set :user, "deploy"
