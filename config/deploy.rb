@@ -36,8 +36,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-set :rvm_path, "/opt/bitnami/rvm" # only needed if not detected
-set :rvm_custom_path, "/opt/bitnami/rvm"
+set :rvm_path, "/opt/bitnami/.rvm" # only needed if not detected
+set :rvm_custom_path, "/opt/bitnami/.rvm"
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
