@@ -203,10 +203,10 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
-  capistrano
+  capistrano (~> 3.7, >= 3.7.1)
   capistrano-bundler
   capistrano-passenger (~> 0.2.0)
-  capistrano-rails
+  capistrano-rails (~> 1.2)
   capistrano-rvm
   carrierwave
   coffee-rails (~> 4.1.0)

@@ -61,12 +61,12 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.7', '>= 3.7.1'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger', '~> 0.2.0'
 
   # Remove the following if your app does not use Rails
-  gem 'capistrano-rails'
+  gem 'capistrano-rails', '~> 1.2'
 
   # Remove the following if your server does not use RVM
   gem 'capistrano-rvm'

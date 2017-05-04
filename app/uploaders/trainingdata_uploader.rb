@@ -1,11 +1,8 @@
-class FileUploader < CarrierWave::Uploader::Base
+class TrainingdataUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-
-  include Sprockets::Rails::Helper
-  #include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -33,14 +30,14 @@ class FileUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  #version :thumb do
-    #process resize_to_fit: [120, :auto]
-  #end
+  # version :thumb do
+  #   process resize_to_fit: [50, 50]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(zip tar tar.gz 7z)
+    %w(zip csv)
   end
 
   # Override the filename of the uploaded files:

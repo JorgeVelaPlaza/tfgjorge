@@ -11,7 +11,7 @@ set :user, "deploy"
 
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/opt/bitnami/projects/tfgjorge"
+set :deploy_to, "/home/deploy/tfgjorge"
 
 set :rails_env, "production"
 
@@ -27,33 +27,12 @@ set :rails_env, "production"
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-set :rvm_path, "/opt/bitnami/.rvm" # only needed if not detected
-set :rvm_custom_path, "/opt/bitnami/.rvm"
+set :rvm_path, "/usr/local/rvm/scripts/rvm" # only needed if not detected
 
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-
-set :passenger_environment_variables, { :path => '/opt/bitnami/ruby/lib/ruby/gems/2.3.0/gems/passenger-5.0.6/bin:$PATH' }
-set :passenger_restart_command, '/opt/bitnami/ruby/lib/ruby/gems/2.3.0/gems/passenger-5.0.6/bin/passenger-config restart-app'
-
-namespace :deploy do
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
-end

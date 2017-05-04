@@ -3,15 +3,14 @@
 <%= render 'shared/errors', obj: @competition %>
 
 <%= form_for @competition do |f| %>
-<!-- Details -->
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">Details</h3>
-     <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
-  </div>
-  <form role="form">
+  <!-- Details -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Details</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
     <div class="box-body">
       <div class="form-group col-xs-12">
         <%= f.label :title %>
@@ -35,6 +34,10 @@
         </div>
       </div>
       <div class="form-group col-xs-6">
+        <%= f.label :Performance_metric %>
+        <%= f.select(:metric, options_for_select([['Metric 1'], ['Metric 2'], ['Metric 3']]), {}, {class: "form-control"}) %>
+      </div>
+      <div class="form-group col-xs-6">
         <%= f.label :difficulty %>
         <%= f.select(:dificultad, options_for_select([['Fácil'], ['Medio'], ['Experto']]), {}, {class: "form-control"}) %>
       </div>
@@ -43,18 +46,16 @@
     <div class="box-footer">
       <%= submit_tag "Clear details", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
     </div>
-  </form>
-</div>
-
-<!-- Overview -->
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">Overview</h3>
-     <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
   </div>
-  <form role="form">
+
+  <!-- Overview -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Overview</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
     <div class="box-body">
       <div class="form-group col-xs-12">
         <%= f.label :description %>
@@ -66,7 +67,7 @@
       </div>
       <div class="form-group col-xs-12">
         <%= f.label :prize %>
-        <%= f.text_area :premio, class: "form-control", rows: "10" %>
+        <%= f.text_area :prizes, class: "form-control", rows: "10" %>
       </div>
       <div class="form-group col-xs-12">
         <%= f.label :about %>
@@ -93,59 +94,58 @@
     <div class="box-footer">
       <%= submit_tag "Clear overview", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
     </div>
-  </form>
-</div>
-
-<!-- Data -->
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">Data</h3>
-     <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
   </div>
-  <form role="form">
+
+  <!-- Data-->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Data</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
     <div class="box-body">
-      <%= f.fields_for :data_training do |builder| %>
         <div class="form-group col-xs-12">
-          <%= builder.label :file, "Upload data" %><br />
-          <%= builder.file_field :file, class: "filestyle form-control",'data-buttonText' => '&nbsp;&nbsp;Select data', 'data-buttonName' => 'btn-primary', 'data-buttonBefore' => true,
+          <%= f.label :file, "Upload data for training" %><br />
+          <%= f.file_field :trainingdata, class: "filestyle form-control",'data-buttonText' => '&nbsp;&nbsp;Select data', 'data-buttonName' => 'btn-primary', 'data-buttonBefore' => true,
           "data-input" => true %>
         </div>
-      <% end %>
+    </div>
 
+    <div class="box-body">
+        <div class="form-group col-xs-12">
+          <%= f.label :file, "Upload data for test" %><br />
+          <%= f.file_field :testdata, class: "filestyle form-control",'data-buttonText' => '&nbsp;&nbsp;Select data', 'data-buttonName' => 'btn-primary', 'data-buttonBefore' => true,
+          "data-input" => true %>
+        </div>
     </div>
 
     <div class="box-footer">
       <%= submit_tag "Clear data", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
     </div>
-  </form>
-</div>
-
-<!-- More -->
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">More</h3>
-     <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
   </div>
-  <form role="form">
+
+  <!-- More -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">More</h3>
+       <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
     <div class="box-body">
       <div class="form-group col-xs-12">
         <%= f.label :rules %>
         <%= f.text_area :rules, class: "form-control", rows: "10" %>
       </div>
     </div>
-
     <div class="box-footer">
       <%= submit_tag "Clear more", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
     </div>
-  </form>
-</div>
+  </div>
 
 
-<%= f.submit "Create competition", class: "btn btn-primary" %>
-<%= button_tag "Cancel", :type => 'button', class: "btn btn-danger" %>
+  <%= f.submit "Create competition", class: "btn btn-primary" %>
+  <%= button_tag "Cancel", :type => 'button', class: "btn btn-danger" %>
 
 <% end %>

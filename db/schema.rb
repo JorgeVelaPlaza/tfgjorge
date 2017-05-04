@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302125658) do
+ActiveRecord::Schema.define(version: 20170406155045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,15 +38,18 @@ ActiveRecord::Schema.define(version: 20170302125658) do
     t.text     "resources"
     t.text     "timeline"
     t.text     "tutorial"
-    t.text     "training_data"
     t.text     "rules"
     t.string   "summary"
+    t.string   "trainingdata"
+    t.string   "testdata"
+    t.string   "metric"
   end
 
-  create_table "data_trainings", force: :cascade do |t|
-    t.string   "file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "groups", force: :cascade do |t|
+    t.integer  "users_group", default: [], array: true
+    t.integer  "comp_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|

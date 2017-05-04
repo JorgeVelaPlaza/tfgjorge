@@ -1,7 +1,7 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:edit, :update, :show, :destroy]
   before_filter :check_for_cancel, :only => [:edit]
-  before_filter :check_for_create_competition, :only => [:edit]
+  before_filter :check_for_create_competition, :only => [:create]
 
 
   def index
@@ -19,7 +19,7 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new(competition_params)
     if @competition.save
-      flash[:notice] = "Competicion creada correctamente"
+      flash[:notice] = "Competition successfully created"
       redirect_to competition_path(@competition)
     else
       render 'new'
@@ -33,8 +33,7 @@ class CompetitionsController < ApplicationController
       id = @competition.id
       CompetitionMailer.update_competition(id).deliver
 
-
-      flash[:notice] = "Competicion actualizada correctamente"
+      flash[:notice] = "Competition successfully updated"
       redirect_to competition_path(@competition)
     else
       render 'edit'
@@ -57,24 +56,29 @@ class CompetitionsController < ApplicationController
     end
   end
 
+
+#Private methods
+
   private
+
   def set_competition
     @competition = Competition.find(params[:id])
   end
 
   def competition_params
     params.require(:competition).permit(:titulo, :descripcion, :premio,
-      :deadline, :dificultad)
+      :deadline, :dificultad, :evaluation, :prizes, :about, :engagement,
+      :resources, :timeline, :tutorial, :rules, :summary, :trainingdata, :testdata, :metric)
   end
 
   def check_for_cancel
-    if params[:commit] == "Cancelar"
+    if params[:commit] == "Cancel"
       redirect_to root_path
     end
   end
 
   def check_for_create_competition
-    if params[:commit] == "Crear competición"
+    if params[:commit] == "Create competition"
       redirect_to user_path(@user)
     end
   end
