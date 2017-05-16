@@ -13,4 +13,8 @@ class Competition < ActiveRecord::Base
   mount_uploader :trainingdata, TrainingdataUploader
   mount_uploader :testdata, TestdataUploader
 
+  def inscriptionToSubmit(id_comp, id_user)
+    c = CompetitionUser.where(:competition_id => id_comp).where(:user_id => id_user)
+    return c
+  end
 end

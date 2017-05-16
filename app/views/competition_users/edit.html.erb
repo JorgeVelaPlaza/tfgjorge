@@ -1,0 +1,26 @@
+<h3>  </h3>
+<br>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Submit your prediction</h3>
+  </div>
+  <!-- /.box-header -->
+  <!-- form start -->
+  <%= form_for @competition_user do |f| %>
+    <form role="form">
+      <div class="box-body">
+        <div class="form-group col-xs-8">
+          <%= f.label :Prediction %>
+          <%= f.file_field :predicfile,class: "filestyle form-control",'data-buttonText' => '&nbsp;&nbsp;Select file', 'data-buttonName' => 'btn-primary', 'data-buttonBefore' => true,
+          "data-input" => true  %>
+      </div>
+      <!-- /.box-body -->
+
+      <div class="box-footer">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+        <%= button_tag "Cancel", :type => 'button', class: "btn btn-danger" %>
+      </div>
+    </form>
+  <% end %>
+</div>
+  <!-- /.box -->

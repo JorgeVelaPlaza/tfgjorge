@@ -2,7 +2,7 @@
 <h4><span style="float: right;">Finaliza el <%= @competition.deadline.strftime("%d/%m/%Y") %></span></h4><br>
 <br>
 
-
+<% @competition_user = @competition.inscriptionToSubmit(@competition.id, current_user.id) %>
 <ul class="nav nav-pills" id="competitionContentMenu">
   <li id="overview" role="presentation" class="active">
     <%= link_to "Overview", "#overview", :remote => true, html_options = "data-toggle" => "pill" %>
@@ -19,7 +19,11 @@
   <li id="More" role="presentation">
     <%= link_to "More", "#more", :remote => true, html_options = "data-toggle" => "pill" %>
   </li>
-  <li role="presentation" class="pull-right"><button class="btn btn-flat btn-success" style="height: 41px;">Submit Predictions</button></li>
+
+    <%= link_to edit_competition_user_path(@competition_user.ids), class: "btn btn-flat btn-success pull-right", style: "height: 41px; color: white;" do %>
+      <i class="fa fa-send-o"></i>  Submit Prediction
+    <% end %>
+
 </ul>
 
 
