@@ -1,7 +1,9 @@
 class CompetitionsController < ApplicationController
-  before_action :set_competition, only: [:edit, :update, :show, :destroy]
+  before_action :set_competition, only: [:edit, :update, :show, :destroy, :leaderboard]
   before_filter :check_for_cancel, :only => [:edit]
   before_filter :check_for_create_competition, :only => [:create]
+  before_filter :check_for_update_competition, :only => [:update]
+
 
 
   def index
@@ -34,7 +36,7 @@ class CompetitionsController < ApplicationController
       CompetitionMailer.update_competition(id).deliver
 
       flash[:notice] = "Competition successfully updated"
-      redirect_to competition_path(@competition)
+      redirect_to competitions_path
     else
       render 'edit'
     end
@@ -48,6 +50,10 @@ class CompetitionsController < ApplicationController
     @competition.destroy
     flash[:notice] = "Competicion eliminada correctamente"
     redirect_to competitions_path
+  end
+
+  def leaderboard
+
   end
 
   def overview
@@ -73,13 +79,19 @@ class CompetitionsController < ApplicationController
 
   def check_for_cancel
     if params[:commit] == "Cancel"
-      redirect_to root_path
+      redirect_to competitions_path
     end
   end
 
   def check_for_create_competition
     if params[:commit] == "Create competition"
       redirect_to user_path(@user)
+    end
+  end
+
+  def check_for_update_competition
+    if params[:commit] == "Update competition"
+      redirect_to competitions_path
     end
   end
 end

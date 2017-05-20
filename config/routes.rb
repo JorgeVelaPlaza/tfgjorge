@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'pages/home', to: 'pages#home'
   get 'pages/about', to: 'pages#about'
   root to:'pages#home'
+  get '/competitions/:id/leaderboard/', to: 'competitions#leaderboard', as: 'competition_leaderboard'
+
   resources :competitions
+
   resources :users, only: [:show, :edit, :update]
   resources :competition_users
   resources :groups

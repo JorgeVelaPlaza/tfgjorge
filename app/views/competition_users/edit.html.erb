@@ -7,7 +7,6 @@
   <!-- /.box-header -->
   <!-- form start -->
   <%= form_for @competition_user do |f| %>
-    <form role="form">
       <div class="box-body">
         <div class="form-group col-xs-8">
           <%= f.label :Prediction %>
@@ -20,7 +19,6 @@
         <%= f.submit "Submit", class: "btn btn-primary" %>
         <%= button_tag "Cancel", :type => 'button', class: "btn btn-danger" %>
       </div>
-    </form>
   <% end %>
 </div>
   <!-- /.box -->

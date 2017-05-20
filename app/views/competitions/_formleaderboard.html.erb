@@ -1,0 +1,50 @@
+<div class="container">
+
+<h3>Leaderboard of "<%= @competition.titulo %>"</h3>
+  <div class="col-xs-11">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Ranking of predictions submitted</h3>
+      </div>
+      <% a = 0 %>
+      <% cont = 0 %>
+      <% inscriptions = CompetitionUser.where(:competition_id => @competition.id).order(score: :desc) %>
+      <% inscriptions.each do |c| %>
+        <% if c.have_score %>
+          <% cont += 1 %>
+        <% end %>
+      <% end %>
+      <% if cont == 0 %>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp;No predictions submitted</h4>
+        <br>
+      <% else %>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>#</th>
+            <th>User/Team Name</th>
+            <th>Team members</th>
+            <th style="width: 150px">Score</th>
+          </tr>
+          <tr>
+          <% inscriptions.each do |c| %>
+            <% u = User.where(:id => c.user_id).first %>
+            <% a = a+1 %>
+            <% if a == 1 %>
+              <td><%= a %> <i class="fa fa-trophy"></td>
+            <% else %>
+              <td><%= a %></td>
+            <% end %>
+            <td><%= u.name %></td>
+            <td><%= u.username %></td>
+            <td>
+              <%= c.score %> %
+            </td>
+          <% end %>
+          </tr>
+        </table>
+      </div>
+      <% end %>
+  </div>
+</div>
