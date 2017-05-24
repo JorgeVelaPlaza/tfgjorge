@@ -1,8 +1,8 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:edit, :update, :show, :destroy, :leaderboard]
   before_filter :check_for_cancel, :only => [:edit]
-  before_filter :check_for_create_competition, :only => [:create]
-  before_filter :check_for_update_competition, :only => [:update]
+  #before_filter :check_for_create_competition, :only => [:create]
+  #before_filter :check_for_update_competition, :only => [:update]
 
 
 
@@ -85,7 +85,7 @@ class CompetitionsController < ApplicationController
 
   def check_for_create_competition
     if params[:commit] == "Create competition"
-      redirect_to user_path(@user)
+      redirect_to competitions_path
     end
   end
 

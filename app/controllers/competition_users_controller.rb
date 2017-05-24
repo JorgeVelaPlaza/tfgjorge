@@ -20,10 +20,10 @@ class CompetitionUsersController < ApplicationController
 
   def create
 
-    @competition_user = CompetitionUser.new(competition_user_params)
+    @competition_user = CompetitionUser.new(:competition_id => params[:competition_id], :user_id => current_user.id)
     if @competition_user.save
       flash[:notice] = "Congratulations, you are enroll! GOOD LUCK!"
-      redirect_to competitions_path
+      redirect_to competition_path(params[:competition_id])
     else
       render 'new'
     end
@@ -54,6 +54,7 @@ class CompetitionUsersController < ApplicationController
   def competition_user_params
     params.require(:competition_user).permit(:competition_id, :user_id, :score, :predicfile)
   end
+
 
   def set_compuser
     @competition_user = CompetitionUser.find(params[:id])

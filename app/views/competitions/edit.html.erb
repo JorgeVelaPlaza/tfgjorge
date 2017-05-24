@@ -34,8 +34,13 @@
         </div>
       </div>
       <div class="form-group col-xs-6">
+        <%= f.label :Performance_metric %>
+        <%= f.select(:metric, options_for_select([['Mean Absolute Error'],['Root Mean Squared Error'],
+      ['Weighted Mean Absolute Error'],['Accuracy'],['Mean Utility']]), {}, {class: "form-control"}) %>
+      </div>
+      <div class="form-group col-xs-6">
         <%= f.label :difficulty %>
-        <%= f.select(:dificultad, options_for_select([['Fácil'], ['Medio'], ['Experto']]), {}, {class: "form-control"}) %>
+        <%= f.select(:dificultad, options_for_select([['Easy'], ['Medium'], ['Expert']]), {}, {class: "form-control"}) %>
       </div>
     </div>
 
@@ -140,6 +145,8 @@
       <%= submit_tag "Clear more", :class => 'inputsubmit btn btn-info', :type => 'reset'%>
     </div>
   </div>
+
+
   <%= f.submit "Update competition", class: "btn btn-success" %>
   <%= button_tag "Cancel", :type => 'button', class: "btn btn-danger" %>
 

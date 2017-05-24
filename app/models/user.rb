@@ -14,14 +14,12 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  def is_enroll?(userId, compId)
-    CompetitionUser.all.each do |i|
-      cu = CompetitionUser.find(i)
-      if (cu.user_id == userId && cu.competition_id == compId)
-        return true
-      else
-        return false
-      end
+  def is_enroll(userId, compId)
+    c = CompetitionUser.where(competition_id: compId).where(user_id: userId).first
+    if c == nil
+      return false
+    else
+      return true
     end
   end
 

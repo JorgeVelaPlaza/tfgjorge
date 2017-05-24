@@ -33,16 +33,16 @@
           Coming soon
           <hr>
           <strong><i class="fa fa-exclamation-triangle margin-r-5"></i> Difficulty:  </strong>
-          <% if @competition.dificultad == 'Fácil' %>
+          <% if @competition.dificultad == 'Easy' %>
             <span class="label label-success"><%= @competition.dificultad %></span>
-          <% elsif @competition.dificultad=="Medio" %>
+          <% elsif @competition.dificultad=="Medium" %>
             <span class="label label-warning"><%= @competition.dificultad %></span>
-          <% elsif @competition.dificultad=="Experto" %>
+          <% elsif @competition.dificultad=="Expert" %>
             <span class="label label-danger"><%= @competition.dificultad %></span>
           <% end %>
           <hr>
           <strong><i class="fa fa-download margin-r-5"></i> Description: </strong>
-          <%= link_to "Descargar",nil, class: "btn btn-danger btn-xs", style:"color: white;" %>
+          <%= link_to "Download",nil, class: "btn btn-danger btn-xs", style:"color: white;" %>
           <hr>
           <strong><i class="fa fa-refresh margin-r-5"></i> Last update: </strong>
           <%= @competition.updated_at.strftime("%d/%m/%Y a las %H:%M") %>

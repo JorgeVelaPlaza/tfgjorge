@@ -6,9 +6,13 @@ class Competition < ActiveRecord::Base
   validates :titulo, presence: true, length: { minimum: 3, maximum: 100}
   validates :descripcion, presence: true
   validates :premio, presence: true
-  validates :dificultad, inclusion: { in: ["Fácil", "Medio", "Experto"] }
+  validates :dificultad, inclusion: { in: ["Easy", "Medium", "Expert"] }
   validates :dificultad, presence: true
   validates :deadline, presence: true
+  validates :metric, inclusion: {in: ["Mean Absolute Error","Root Mean Squared Error",
+    "Weighted Mean Absolute Error","Accuracy","Mean Utility"] }
+  validates :trainingdata, presence: true
+  validates :testdata, presence: true
 
   mount_uploader :trainingdata, TrainingdataUploader
   mount_uploader :testdata, TestdataUploader

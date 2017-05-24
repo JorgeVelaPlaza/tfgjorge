@@ -23,7 +23,8 @@
   <!-- /.box-header -->
   <div class="box-body table-responsive no-padding">
     <table class="table table-hover">
-    <% @competitions.each do |competition| %>
+    <% unless @competitions.empty? %>
+    <% @competitions.order(id: :asc).each do |competition| %>
       <tr>
       <td>
         <ul class="products-list product-list-in-box">
@@ -35,11 +36,11 @@
               <b><h4><%= link_to competition.titulo, competition_path(competition), class: "product-title" %></h4></b>
               <span class= "product-description" ><%= competition.summary %></span>
               <br>
-              <% if competition.dificultad == 'Fácil' %>
+              <% if competition.dificultad == 'Easy' %>
                 <span class="label label-success"><%= competition.dificultad %></span>
-              <% elsif competition.dificultad=="Medio" %>
+              <% elsif competition.dificultad=="Medium" %>
                 <span class="label label-warning"><%= competition.dificultad %></span>
-              <% elsif competition.dificultad=="Experto" %>
+              <% elsif competition.dificultad=="Expert" %>
                 <span class="label label-danger"><%= competition.dificultad %></span>
               <% end %> <b> - </b>
               <span><%= competition.deadline.strftime("%d/%m/%Y") %></span> <b> - </b>
@@ -50,12 +51,17 @@
               <span>Leaderboard</span>
             </div>
             <div class="col-xs-1 text-center">
-              <i class="ion ion-archive comp-table-icon"></i><br>
+              <%= link_to "", competition.trainingdata.url, class: "ion ion-archive comp-table-icon", style: "color: black;" %> <br>
               <span>Data</span>
             </div>
             <div class="col-xs-1 text-center">
-              <i class="ion ion-android-checkbox-outline comp-table-icon"></i><br>
+            <% if current_user.is_enroll(current_user.id, competition.id) %>
+              <%= link_to "", edit_competition_user_path(CompetitionUser.where(competition_id: competition.id).where(user_id: current_user.id).first), class: "ion ion-android-checkbox-outline comp-table-icon", style: "color: black;" %> <br>
               <span>Prediction</span>
+            <% else %>
+              <i class="ion ion-android-checkbox-outline comp-table-icon disabled" style= "color: grey;" title="Enroll First!" ></i><br>
+              <span>Prediction</span>
+            <% end %>
             </div>
             <div class="col-xs-1 text-center btn-group-vertical btn-flat" style="padding-top: 15px;">
               <% if current_user.admin? %>
@@ -64,7 +70,7 @@
                 <%= link_to "", competition_path(competition), method: :delete,
                       data: {confirm: "Are you sure?"}, class: "btn btn-danger fa fa-trash-o actionCompIndex" %>
               <% else %>
-                <%= link_to "Ver más", competition_path(competition), class: "btn btn-info btn-xs" %>
+                <%= link_to "More", competition_path(competition), class: "btn btn-info btn-xs" %>
               <% end %>
             </div>
           </li>
@@ -72,6 +78,7 @@
       </td>
 
       </tr>
+    <% end %>
     <% end %>
     </table>
   </div>
