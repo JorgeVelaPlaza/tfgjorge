@@ -26,7 +26,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def mycompetitions
 
+  end
 
 
   private

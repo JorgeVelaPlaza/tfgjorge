@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   get 'pages/about', to: 'pages#about'
   root to:'pages#home'
   get '/competitions/:id/leaderboard/', to: 'competitions#leaderboard', as: 'competition_leaderboard'
+  get '/users/:id/mycompetitions/', to: 'users#mycompetitions', as: 'users_mycompetitions'
 
   resources :competitions
 
   resources :users, only: [:show, :edit, :update]
   resources :competition_users
   resources :groups
+  resources :topics
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

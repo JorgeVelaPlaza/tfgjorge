@@ -1,0 +1,19 @@
+$(document).ready(function() {
+  $("input[name='competition_type']").change(function(e) {
+    if (e.target.id === 'competition_type_regression') {
+      $("#competition_metric option[value='Mean Absolute Error']").show();
+      $("#competition_metric option[value='Root Mean Squared Error']").show();
+      $("#competition_metric option[value='Weighted Mean Absolute Error']").show();
+      $("#competition_metric option[value='Accuracy']").hide();
+      $("#competition_metric option[value='Mean Utility']").hide();
+
+    }
+     else {
+      $("#competition_metric option[value=''Mean Absolute Error'']").hide();
+      $("#competition_metric option[value='Root Mean Squared Error']").hide();
+      $("#competition_metric option[value='Weighted Mean Absolute Error']").hide();
+      $("#competition_metric option[value='Accuracy']").show();
+      $("#competition_metric option[value='Mean Utility']").show();
+     }
+  });
+});

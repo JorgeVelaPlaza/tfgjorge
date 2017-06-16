@@ -1,0 +1,82 @@
+<h3>Competitions of <%= current_user.username %></h3>
+<br>
+
+<div class="box box-info">
+  <div class="box-header">
+    <h3 class="box-title">Hi <%= current_user.name %>, you are enrolled in <%= current_user.competitions.count %> competitions</h3>
+
+    <div class="box-tools">
+      <div class="input-group input-group-sm" style="width: 150px;">
+        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-hover">
+    <% mycompetitions = current_user.competitions %>
+    <% unless mycompetitions.empty? %>
+    <% mycompetitions.order(id: :asc).each do |mycomp| %>
+      <tr>
+      <td>
+        <ul class="products-list product-list-in-box">
+          <li class="item">
+            <div class="col-xs-2 product-img">
+              <img alt="Comp Image">
+            </div>
+            <div class="col-xs-6 product-info">
+              <b><h4><%= link_to mycomp.titulo, competition_path(mycomp), class: "product-title" %></h4></b>
+              <span class= "product-description" ><%= mycomp.summary %></span>
+              <br>
+              <% if mycomp.dificultad == 'Easy' %>
+                <span class="label label-success"><%= mycomp.dificultad %></span>
+              <% elsif mycomp.dificultad=="Medium" %>
+                <span class="label label-warning"><%= mycomp.dificultad %></span>
+              <% elsif mycomp.dificultad=="Expert" %>
+                <span class="label label-danger"><%= mycomp.dificultad %></span>
+              <% end %> <b> - </b>
+              <span><%= mycomp.deadline.strftime("%d/%m/%Y") %></span> <b> - </b>
+              <span class="label label-warning"><%= mycomp.premio %> €</span>
+            </div>
+            <div class="col-xs-1 text-center ">
+              <%= link_to "", competition_leaderboard_path(mycomp), class: "ion ion-trophy comp-table-icon", style: "color: black;" %> <br>
+              <span>Leaderboard</span>
+            </div>
+            <div class="col-xs-1 text-center">
+              <%= link_to "", mycomp.trainingdata.url, class: "ion ion-archive comp-table-icon", style: "color: black;" %> <br>
+              <span>Data</span>
+            </div>
+            <div class="col-xs-1 text-center">
+            <% if current_user.is_enroll(current_user.id, mycomp.id) %>
+              <%= link_to "", edit_competition_user_path(CompetitionUser.where(competition_id: mycomp.id).where(user_id: current_user.id).first), class: "ion ion-android-checkbox-outline comp-table-icon", style: "color: black;" %> <br>
+              <span>Prediction</span>
+            <% else %>
+              <i class="ion ion-android-checkbox-outline comp-table-icon disabled" style= "color: grey;" title="Enroll First!" ></i><br>
+              <span>Prediction</span>
+            <% end %>
+            </div>
+            <div class="col-xs-1 text-center btn-group-vertical btn-flat" style="padding-top: 15px;">
+              <% if current_user.admin? %>
+                <%= link_to "", edit_competition_path(mycomp), class: "btn btn-primary fa fa-edit actionCompIndex"%>
+                <%= link_to "", competition_path(mycomp), class: "btn btn-info fa fa-eye actionCompIndex" %>
+                <%= link_to "", competition_path(mycomp), method: :delete,
+                      data: {confirm: "Are you sure?"}, class: "btn btn-danger fa fa-trash-o actionCompIndex" %>
+              <% else %>
+                <%= link_to "More", competition_path(mycomp), class: "btn btn-info btn-xs" %>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+      </td>
+
+      </tr>
+    <% end %>
+    <% end %>
+    </table>
+  </div>
+</div>
+<!-- /.box -->
