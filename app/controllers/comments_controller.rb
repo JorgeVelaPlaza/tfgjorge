@@ -13,11 +13,18 @@ class CommentsController < ApplicationController
   end
   def edit
     @topic = Topic.find(params[:topic_id])
+    @comment = @topic.comments.find(params[:id])
   end
 
   def update
     @topic = Topic.find(params[:topic_id])
+    @comment = @topic.comments.find(params[:id])
 
+    if @comment.update(params[:comments]).permit(:comment))
+      redirect_to topic_path(@topic)
+    else
+      render 'edit'
+    end
 
   end
   def destroy

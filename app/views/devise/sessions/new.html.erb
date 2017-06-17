@@ -6,7 +6,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Inicia sesión para comenzar</p>
+    <p class="login-box-msg">Sign in to start</p>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group has-feedback">
@@ -15,7 +15,7 @@
       </div>
 
       <div class="form-group has-feedback">
-        <%= f.password_field :password, autocomplete: "off", type: "password", class: "form-control", placeholder: "Contraseña"%>
+        <%= f.password_field :password, autocomplete: "off", type: "password", class: "form-control", placeholder: "Password"%>
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
 
@@ -24,12 +24,12 @@
           <% if devise_mapping.rememberable? -%>
           <div class="field iCheck-helper">
             <%= f.check_box :remember_me %>
-            <%= f.label :recuérdame %>
+            <%= f.label :remember_me %>
           </div>
           <% end -%>
         </div>
         <div class="actions col-xs-5">
-          <%= f.submit "Iniciar sesión", class: "btn btn-primary btn-block btn-flat" %>
+          <%= f.submit "Sign In", class: "btn btn-primary btn-block btn-flat" %>
         </div>
       </div>
 
@@ -40,8 +40,8 @@
 
     <div class="social-auth-links text-center">
       <p>- O -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Inicia sesión con Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Inicia sesión con Google+</a>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign In with Google+</a>
     </div>
     <!-- /.social-auth-links -->
 
