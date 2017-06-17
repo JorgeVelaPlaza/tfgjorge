@@ -2,6 +2,7 @@ class Competition < ActiveRecord::Base
   attr_accessor :name
   has_many :competition_users
   has_many :users, through: :competition_users
+  has_many :topics
 
   validates :titulo, presence: true, length: { minimum: 3, maximum: 100}
   validates :descripcion, presence: true
