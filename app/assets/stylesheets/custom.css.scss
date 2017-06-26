@@ -33,6 +33,18 @@
   height: auto;
 }
 
+.topicIndexUserImg{
+  width: 50px !important;
+  height: auto !important;
+}
+
+.topicUserImg{
+  width: 80px !important;
+  height: auto !important;
+  margin:0px auto !important;
+
+}
+
 .comp-table-icon{
   padding-top: 16px;
   padding-bottom: 16px;
@@ -79,4 +91,10 @@
     box-sizing:border-box;
     border-top: 1px solid #000;
 
+}
+
+#vertical-bar {
+    border-left: 1px solid #ccc;
+    width:1px;
+    height:500px;
 }

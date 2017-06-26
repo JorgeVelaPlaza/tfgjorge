@@ -34,5 +34,5 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-set :rvm_path, "/usr/local/rvm/scripts/rvm" # only needed if not detected
+# set :rvm_path, "/usr/local/rvm/scripts/rvm" # only needed if not detected
 

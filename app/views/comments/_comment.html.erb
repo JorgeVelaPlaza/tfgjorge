@@ -1,0 +1,18 @@
+  <div class="box-footer box-comments">
+    <div class="box-comment">
+      <!-- User image -->
+      <% if comment.user.avatar? %>
+        <%= image_tag comment.user.avatar.url, class: "img-circle img-sm", :alt => "User Image" %>
+      <% else %>
+        <%= image_tag "/uploads/usuario_sin_foto.jpg", class: "img-circle img-sm", :alt => "User Image"%>
+      <% end %>
+      <div class="comment-text">
+        <span class="username"><%= comment.user.username %>
+            <span class="text-muted pull-right"><%= time_ago_in_words(comment.created_at) %></span>
+        </span><!-- /.username -->
+        <%= comment.body %>
+      </div>
+      <!-- /.comment-text -->
+    </div>
+  </div>
+

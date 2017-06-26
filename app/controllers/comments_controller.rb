@@ -2,13 +2,12 @@ class CommentsController < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    @comment = @topic.comments.create(params[:comment]).permit(:comment)
-    @comment.user_id = current_user
-    @comment.save
-    if @comment.save
-      redirect_to topic_path(@topic)
-    else
-      render 'new'
+    @comment = @topic.comments.new(comment_params)
+    @comment.user_id = current_user.id if current_user
+    @comment.save!
+
+    respond_to do |format|
+        format.js # render comments/create.js.erb
     end
   end
   def edit
@@ -20,7 +19,7 @@ class CommentsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @comment = @topic.comments.find(params[:id])
 
-    if @comment.update(params[:comments]).permit(:comment))
+    if @comment.update(params[:comments]).permit(:body)
       redirect_to topic_path(@topic)
     else
       render 'edit'
@@ -33,5 +32,11 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to topic_path
 
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:body)
   end
 end

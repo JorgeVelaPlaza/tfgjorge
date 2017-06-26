@@ -1,0 +1,2 @@
+$("#forumActivity").html("<%= escape_javascript(render partial: 'topics/index') %>");
+$('#comments').html("<%=j render @topic.comments %>");

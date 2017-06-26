@@ -102,6 +102,13 @@ class CompetitionUser < ActiveRecord::Base
     com_user.save
   end #method computerScore
 
+  def have_score
+    x = false
+    if score != nil
+      x = true
+    end
+    return x
+  end
 
   private
 
@@ -139,13 +146,7 @@ class CompetitionUser < ActiveRecord::Base
     end
   end
 
-  def have_score
-    x = false
-    if score != nil
-      x = true
-    end
-    return x
-  end
+
 
   def checkNumberCase(arrayT, arrayV)
     n = arrayT.size-1

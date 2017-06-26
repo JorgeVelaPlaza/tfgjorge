@@ -1,0 +1,52 @@
+<div id="forumActivity" class="col-xs-11">
+<br><p id="btnNewTopic">
+<%= link_to "New Topic", new_topic_path(), :remote => true, class: "btn btn-primary centerbtn", :controller => "topics", :action => :create, :competition_id => @competition.id %>
+</p><br>
+
+
+<% if @competition.topics.empty? %>
+  <h5 id="noTopicsText"> No topics to show. Create a new one!</h5>
+  <br>
+<% else %>
+  <% @competition.topics.order(updated_at: :desc).each do |topic| %>
+
+  <tr>
+  <hr>
+  <td>
+    <ul class="products-list product-list-in-box" id="topics">
+      <li class="item">
+        <div class="col-xs-1 product-img">
+          <% if topic.user.avatar? %>
+            <%= image_tag topic.user.avatar.url, class: "topicIndexUserImg img-circle", :alt => "User Image" %>
+          <% else %>
+            <%= image_tag "/uploads/usuario_sin_foto.jpg", class: "user-image img-circle imgresize", :alt => "User Image"%>
+          <% end %>
+        </div>
+        <div class="col-xs-6 product-info">
+          <b><h4><%= link_to topic.title, topic_path(topic), :remote => true,  class: "product-title"  %></h4></b>
+          <span class= "product-description" >posted <%= time_ago_in_words(topic.created_at) %> ago,
+           by <%= topic.user.username %></span>
+          <br>
+        </div>
+        <div class="col-xs-3 product-info ">
+        <% if topic.comments.count == 0 %>
+          <span>No comments to this topic</span>
+          <br>
+        <% else %>
+          <span class="product-description">last comment by</span>
+          <br>
+          <span><%= topic.user.username %>, <%= time_ago_in_words(topic.comments.last.created_at) %> ago</span>
+          <br>
+        <% end %>
+        </div>
+        <div class="col-xs-2 text-center comp-table-icon">
+          <i class="fa fa-comments"></i><span>&nbsp;<%= topic.comments.count %></span>
+        </div>
+      </li>
+    </ul>
+  </td>
+  </tr>
+  <% end %>
+<% end %>
+</div>
+</div>

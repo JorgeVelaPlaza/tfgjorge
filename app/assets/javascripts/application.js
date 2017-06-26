@@ -23,3 +23,11 @@
     });
 
 $(":file").filestyle({input: false});
+
+
+$('#comment_area').keydown(function(e){
+      if(e.keyCode == 13){
+           this.submit();
+           this.value = "";
+       }
+    });

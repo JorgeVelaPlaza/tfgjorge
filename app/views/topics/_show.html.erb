@@ -1,0 +1,65 @@
+<div id="forumActivity" class="col-xs-11">
+<br>
+<br>
+  <div class="col-xs-2">
+    <% if @topic.user.avatar? %>
+      <%= image_tag @topic.user.avatar.url, class: "topicUserImg img-circle", :alt => "User Image" %>
+    <% else %>
+      <%= image_tag "/uploads/usuario_sin_foto.jpg", class: "user-image img-circle imgresize", :alt => "User Image"%>
+    <% end %>
+    <br>
+    <h5 style="text-align: center;"><%= @topic.user.name %></h5>
+  </div>
+  <div class="vertical-bar"></div>
+  <div class="col-xs-9">
+    <h4><%= @topic.title %></h4>
+    <p><%= @topic.content %></p>
+  </div>
+  <div class="col-xs-11" style= "padding-left: 150px;" id= "comments-count">
+    Comments (<%= @topic.comments.count %>)
+  </div>
+  <br>
+
+  <div class="col-xs-2">
+  </div>
+  <div class="col-xs-9" id="comments">
+  <% unless @topic.comments.empty? %>
+  <% @topic.comments.order(created_at: :asc).each do |comment| %>
+    <div class="box-footer box-comments">
+      <div class="box-comment">
+        <!-- User image -->
+        <% if topic.user.avatar? %>
+          <%= image_tag topic.user.avatar.url, class: "img-circle img-sm", :alt => "User Image" %>
+        <% else %>
+          <%= image_tag "/uploads/usuario_sin_foto.jpg", class: "img-circle img-sm", :alt => "User Image"%>
+        <% end %>
+        <div class="comment-text">
+          <span class="username"><%= comment.user.username %>
+              <span class="text-muted pull-right"><%= time_ago_in_words(comment.created_at) %></span>
+          </span><!-- /.username -->
+           <%= comment.body %>
+        </div>
+        <!-- /.comment-text -->
+      </div>
+    </div>
+  <% end %>
+  <% end %>
+  </div>
+
+  <div class="col-xs-2">
+  </div>
+  <!-- /.box-footer -->
+  <div class="box-footer col-xs-9" id="comments-div">
+      <%= image_tag current_user.avatar.url, class: "img-responsive img-circle img-sm", :alt => "User Image" %>
+      <div class="img-push">
+        <%= form_for [@topic, @topic.comments.new], remote: true do |f| %>
+          <%= f.text_area :body, rows: 2, placeholder: "Write a comment...", class: 'form-control' %>
+          <br>
+          <%= f.submit 'Comment Topic', class: 'btn btn-primary btn-sm' %>
+        <% end %>
+      </div>
+  </div>
+  <!-- /.box-footer -->
+
+</div>
+

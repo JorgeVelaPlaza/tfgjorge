@@ -62,6 +62,10 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def show_topics
+    @competition = Competition.find(params[:topics])
+  end
+
 
 #Private methods
 

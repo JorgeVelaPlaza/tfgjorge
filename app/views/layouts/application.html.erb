@@ -75,7 +75,7 @@
                     <% end %>
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <% if current_user %>
-                      <span class="hidden-xs">Conect as <b><%= current_user.username %></b></span>
+                      <span class="hidden-xs">Connect as <b><%= current_user.username %></b></span>
                     <% end%>
                   </a>
                   <ul class="dropdown-menu">
@@ -105,7 +105,7 @@
                       <div class="row">
                         <div class="col-xs-4 text-center">
                           <i class="fa fa-flag-checkered"></i>
-                          <%= link_to "Competitions", competitions_path %>
+                          <%= link_to "Competitions", users_mycompetitions_path(current_user.id) %>
                         </div>
                         <div class="col-xs-4 text-center">
                           <i class="fa fa-edit"></i><br>
@@ -162,36 +162,6 @@
           </div>
           <!-- /.container -->
         </footer>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark" style="width: 170px; height: 220px;">
-          <!-- Create the tabs -->
-          <ul class="nav nav-tabs nav-justified control-sidebar-tabs" style="width: 170px; height: 170px;">
-            <li class="tituloMenuAjustes"><i class="fa fa-gears"></i> Ajustes generales</li>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-              <form method="post">
-                <div class="form-group">
-                  <ul class="control-sidebar-menu">
-                    <li role="separator" class="divider" style="color: white;"></li>
-                    <li class="menuAjustes"><a href="#" style="color: white;"><i class="fa fa-user"></i>&nbsp; Ver perfil</a></li>
-                    <li class="menuAjustes"><a href="#" style="color: white;"><i class="fa fa-edit"></i>&nbsp; Editar perfil</a></li>
-                    <li class="menuAjustes"><a href="#" style="color: white;"><i class="fa fa-sign-out"></i>&nbsp; Cerrar sesión</a></li>
-                  </ul>
-                </div>
-                <!-- /.form-group -->
-              </form>
-            </div>
-            <!-- /.tab-pane -->
-          </div>
-          </ul>
-          </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-
-        </aside>
-        <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
              immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
