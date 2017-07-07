@@ -1,0 +1,67 @@
+<br><p>
+  <%= link_to "New Topic", new_topic_path(), class: "btn btn-primary" %>
+  </p><br>
+
+  <div class="box box-info col-xs-11">
+    <div class="box-header">
+      <h3 class="box-title"><%= @topics.count %> topics</h3>
+
+      <div class="box-tools">
+        <div class="input-group input-group-sm" style="width: 150px;">
+          <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+      <table class="table table-hover">
+      <% unless @topics.empty? %>
+      <% @topics.order(updated_at: :desc).each do |topic| %>
+      <tr>
+      <td>
+        <ul class="products-list product-list-in-box" id="topics">
+          <li class="item">
+            <div class="col-xs-1 product-img">
+              <% if topic.user.avatar? %>
+                <%= image_tag topic.user.avatar.url, class: "topicIndexUserImg img-circle", :alt => "User Image" %>
+              <% else %>
+                <%= image_tag "/uploads/usuario_sin_foto.jpg", class: "user-image img-circle imgresize", :alt => "User Image"%>
+              <% end %>
+            </div>
+            <div class="col-xs-6 product-info">
+              <b><h4><%= link_to topic.title, topic_path(topic),  class: "product-title"  %></h4></b>
+              <span class= "product-description" >posted <%= time_ago_in_words(topic.created_at) %> ago,
+               by <%= topic.user.username %> in <%= link_to topic.competition.titulo, competition_path(topic.competition) %></span>
+              <br>
+            </div>
+            <div class="col-xs-3 product-info ">
+            <% if topic.comments.count == 0 %>
+              <span>No comments to this topic</span>
+              <br>
+            <% else %>
+              <span class="product-description">last comment by</span>
+              <br>
+              <span><%= topic.user.username %>, <%= time_ago_in_words(topic.comments.last.created_at) %> ago</span>
+              <br>
+            <% end %>
+            </div>
+            <div class="col-xs-2 text-center comp-table-icon">
+              <i class="fa fa-comments"></i><span>&nbsp;<%= topic.comments.count %></span>
+            </div>
+          </li>
+        </ul>
+      </td>
+      </tr>
+      <% end %>
+      <% end %>
+      </table>
+    </div>
+  </div>
+
+  </div>
+</div>

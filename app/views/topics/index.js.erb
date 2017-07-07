@@ -1,2 +1,2 @@
-$("#forumActivity").append("<%= j render partial: 'topics/new' %>");
+$("#forumActivity").html("<%= escape_javascript(render partial: 'topics/new', locals: { topic: @topic } ) %>");
 

@@ -1,6 +1,6 @@
-<div id="forumActivity" class="col-xs-11">
+<div id="forumActivity" class="col-xs-10">
 <br><p id="btnNewTopic">
-<%= link_to "New Topic", new_topic_path(), :remote => true, class: "btn btn-primary centerbtn", :controller => "topics", :action => :create, :competition_id => @competition.id %>
+<%= link_to "New Topic", new_competition_topic_path(@competition), :remote => true, class: "btn btn-primary centerbtn" %>
 </p><br>
 
 
@@ -36,10 +36,9 @@
           <span class="product-description">last comment by</span>
           <br>
           <span><%= topic.user.username %>, <%= time_ago_in_words(topic.comments.last.created_at) %> ago</span>
-          <br>
         <% end %>
         </div>
-        <div class="col-xs-2 text-center comp-table-icon">
+        <div class="col-xs-1 text-center comp-table-icon">
           <i class="fa fa-comments"></i><span>&nbsp;<%= topic.comments.count %></span>
         </div>
       </li>

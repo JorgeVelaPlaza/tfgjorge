@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'pages/about', to: 'pages#about'
   root to:'pages#home'
   get '/competitions/:id/leaderboard/', to: 'competitions#leaderboard', as: 'competition_leaderboard'
+  get '/competitions/discussions/', to: 'competitions#discussions', as: 'competition_discussions'
   get '/users/:id/mycompetitions/', to: 'users#mycompetitions', as: 'users_mycompetitions'
 
   resources :competitions

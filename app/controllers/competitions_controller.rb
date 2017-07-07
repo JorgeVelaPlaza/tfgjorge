@@ -56,6 +56,10 @@ class CompetitionsController < ApplicationController
 
   end
 
+  def discussions
+
+  end
+
   def overview
     respond_to do |format|
       format.js

@@ -14,6 +14,7 @@ class Competition < ActiveRecord::Base
     "Weighted Mean Absolute Error","Accuracy","Mean Utility"] }
   validates :trainingdata, presence: true
   validates :testdata, presence: true
+  validates :type_competition, inclusion: {in: ["Regression","Classification"] }
 
   mount_uploader :trainingdata, TrainingdataUploader
   mount_uploader :testdata, TestdataUploader

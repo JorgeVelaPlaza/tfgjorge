@@ -34,10 +34,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
                 <li>
                   <%= link_to users_mycompetitions_path(current_user.id) do %>
                       <i class="fa fa-flag-checkered"></i>  My Competitions
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to topics_path do %>
+                      <i class="fa fa-users"></i>  Discussion
                   <% end %>
                 </li>
                 <li class="dropdown">

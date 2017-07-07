@@ -22,7 +22,7 @@
       });
     });
 
-$(":file").filestyle({input: false});
+$(".file").filestyle({input: false});
 
 
 $('#comment_area').keydown(function(e){
@@ -31,3 +31,4 @@ $('#comment_area').keydown(function(e){
            this.value = "";
        }
     });
+

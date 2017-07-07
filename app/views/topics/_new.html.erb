@@ -12,8 +12,9 @@
     <div class="vertical-bar"></div>
     <h3><%= @topic.competition_id %></h3>
     <div class="col-xs-9">
-      <%= form_for @topic, remote: true do |f| %>
+      <%= form_for @topic, :remote => true do |f| %>
 
+        <%= f.hidden_field :competition_id,  :value => params[:competition_id], class: "idcomp form-control" %>
         <%= f.label :title %>
         <%= f.text_field :title, rows: 2, placeholder: "Write the title...", class: 'form-control' %>
         <%= f.label :content %>
@@ -24,3 +25,4 @@
     </div>
   <br>
 </div>
+<br>

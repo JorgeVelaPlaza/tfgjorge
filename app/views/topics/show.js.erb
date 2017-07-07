@@ -1,1 +1,2 @@
 $("#forumActivity").html("<%= escape_javascript(render partial: 'topics/show', locals: { topic: @topic } ) %>");
+$('#comments').html("<%=j render @topic.comments %>");
