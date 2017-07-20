@@ -21,6 +21,8 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new(competition_params)
     if @competition.save
+      @competition.delay(run_at: @competition.startdate).start_competition
+      @competition.delay(run_at: @competition.deadline).finish_competition
       flash[:notice] = "Competition successfully created"
       redirect_to competition_path(@competition)
     else
@@ -33,7 +35,7 @@ class CompetitionsController < ApplicationController
 
       #send email
       id = @competition.id
-      CompetitionMailer.update_competition(id).deliver
+      CompetitionMailer.update_competition(id).deliver_now
 
       flash[:notice] = "Competition successfully updated"
       redirect_to competitions_path
@@ -48,7 +50,7 @@ class CompetitionsController < ApplicationController
 
   def destroy
     @competition.destroy
-    flash[:notice] = "Competicion eliminada correctamente"
+    flash[:notice] = "Competition successfully deleted"
     redirect_to competitions_path
   end
 
@@ -82,7 +84,9 @@ class CompetitionsController < ApplicationController
   def competition_params
     params.require(:competition).permit(:titulo, :descripcion, :premio,
       :deadline, :dificultad, :evaluation, :prizes, :about, :engagement,
-      :resources, :timeline, :tutorial, :rules, :summary, :trainingdata, :testdata, :metric)
+      :resources, :timeline, :tutorial, :rules, :summary, :trainingdata,
+      :testdata, :metric, :type_competition,:finished, :started, :startdate,
+      :nGroups, :nWinners)
   end
 
   def check_for_cancel

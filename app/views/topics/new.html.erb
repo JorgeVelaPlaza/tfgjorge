@@ -19,7 +19,7 @@
           <option value="<%= competition.id %>"><%= competition.titulo %></option>
           <% end %>
         </select>
-        <%= f.text_field :competition_id,  :value => params[:competition_id], class: "idcomp form-control" %>
+        <%= f.hidden_field :competition_id,  :value => params[:competition_id], class: "idcomp form-control" %>
         <%= f.label :title %>
         <%= f.text_field :title, rows: 2, placeholder: "Write the title...", class: 'form-control' %>
         <%= f.label :content %>

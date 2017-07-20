@@ -6,12 +6,14 @@ class TopicsController < ApplicationController
     @topics = Topic.all
     respond_to do |format|
       format.js
+      format.html
     end
   end
 
   def show
     respond_to do |format|
       format.js
+      format.html
     end
   end
 
@@ -20,6 +22,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       format.js
+      format.html
     end
   end
 

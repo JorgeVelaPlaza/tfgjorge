@@ -14,10 +14,22 @@ class Competition < ActiveRecord::Base
     "Weighted Mean Absolute Error","Accuracy","Mean Utility"] }
   validates :trainingdata, presence: true
   validates :testdata, presence: true
-  validates :type_competition, inclusion: {in: ["Regression","Classification"] }
+  validates :type_competition, inclusion: {in: ["regression","classification"] }
 
   mount_uploader :trainingdata, TrainingdataUploader
   mount_uploader :testdata, TestdataUploader
 
+
+  def finish_competition
+    self.finished = true
+    self.save
+    CompetitionMailer.endCompetition(self).deliver
+  end
+
+  def start_competition
+    self.started = true
+    self.save
+    CompetitionMailer.startCompetition(self).deliver
+  end
 
 end

@@ -32,6 +32,8 @@ gem 'carrierwave'
 gem 'redcarpet', '~> 3.4'
 gem 'pygments.rb', '~> 1.1', '>= 1.1.1'
 gem 'sprockets', '~> 3.7', '>= 3.7.1'
+gem 'delayed_job_active_record'
+
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

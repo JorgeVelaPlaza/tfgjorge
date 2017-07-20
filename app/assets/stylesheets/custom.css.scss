@@ -80,21 +80,20 @@
     text-align: left;
  }
 
-/*footer*/
-#footer {
-    width: auto;
-    height: 50px;
 
-    margin-top: 75px;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-    border-top: 1px solid #000;
-
-}
 
 #vertical-bar {
     border-left: 1px solid #ccc;
     width:1px;
     height:500px;
+}
+
+/*footer*/
+
+.ftr {
+  border-top: 1px solid #000;
+  position: absolute !important;
+  bottom: 0px !important;
+  right: 0px;
+  left: 0px;
 }

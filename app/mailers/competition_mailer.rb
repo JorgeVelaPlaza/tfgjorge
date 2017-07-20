@@ -18,4 +18,25 @@ class CompetitionMailer < ApplicationMailer
       end
     end
   end
+
+  def endCompetition(competition)
+    @competition = Competition.find(competition.id)
+    @competition.users.each do |i|
+      @user = User.find(i)
+      mail( :to => @user.email, :subject => "Fin de competición") do |format|
+            format.html
+      end
+    end
+  end
+
+  def startCompetition(competition)
+    @competition = Competition.find(competition.id)
+    @competition.users.each do |i|
+      @user = User.find(i)
+      mail( :to => @user.email, :subject => "Inicio de competición") do |format|
+            format.html
+      end
+    end
+  end
+
 end

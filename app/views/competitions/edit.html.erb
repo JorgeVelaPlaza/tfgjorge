@@ -34,13 +34,21 @@
         </div>
       </div>
       <div class="form-group col-xs-6">
-        <%= f.label :Performance_metric %>
-        <%= f.select(:metric, options_for_select([['Mean Absolute Error'],['Root Mean Squared Error'],
-      ['Weighted Mean Absolute Error'],['Accuracy'],['Mean Utility']]), {}, {class: "form-control"}) %>
+        <%= f.label :Competition_type %> <br>
+        <%= f.radio_button :type_competition, "regression", :checked => true, class: "my_radio" %>
+        <%= f.label :type_competition, "Regression"%>
+        &nbsp;
+        <%= f.radio_button :type_competition, "classification", class: "my_radio" %>
+        <%= f.label :type_competition, "Classification"%>
       </div>
       <div class="form-group col-xs-6">
         <%= f.label :difficulty %>
         <%= f.select(:dificultad, options_for_select([['Easy'], ['Medium'], ['Expert']]), {}, {class: "form-control"}) %>
+      </div>
+      <div class="form-group col-xs-6">
+        <%= f.label :Performance_metric %>
+        <%= f.select(:metric, options_for_select([['Mean Absolute Error'],['Root Mean Squared Error'],
+      ['Weighted Mean Absolute Error'],['Accuracy'],['Mean Utility']]), {}, {class: "form-control", id: "selectMetric"}) %>
       </div>
     </div>
 
@@ -152,3 +160,27 @@
 
 <% end %>
 
+<script>
+  $(document).ready(function() {
+    $('.my_radio').change(function() {
+
+      if($(this).val() == "regression") {
+        var options = {
+          'Mean Absolute Error': 'Mean Absolute Error',
+          'Root Mean Squared Error': 'Root Mean Squared Error',
+          'Weighted Mean Absolute Error': 'Weighted Mean Absolute Error'
+        };
+      } else {
+        var options = {
+          'Accuracy': 'Accuracy',
+          'Mean Utility': 'Mean Utility'
+        };
+      }
+
+      $('#selectMetric').empty();
+      $.each(options, function(key, value) {
+        $('#selectMetric').append('<option value="' + value + '">' + key + '</option>');
+      });
+    });
+  });
+</script>
