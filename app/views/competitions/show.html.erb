@@ -21,7 +21,7 @@
   <li id="More" role="presentation">
     <%= link_to "More", "#more", :remote => true, html_options = "data-toggle" => "pill" %>
   </li>
-  <% if c == nil %>
+  <% if c == nil || !@competition.started %>
     <%= button_tag "", class: "btn btn-flat btn-success pull-right disabled", style: "height: 41px; color: white;" do %>
       <i class="fa fa-send-o"></i>  Submit Prediction
     <% end %>

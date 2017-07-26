@@ -65,8 +65,21 @@
         <%= f.select(:metric, options_for_select([['Mean Absolute Error'],['Root Mean Squared Error'], ['Weighted Mean Absolute Error'], ['Accuracy'],['Mean Utility']]), {}, {class: "form-control", id: "selectMetric"}) %>
       </div>
       <div class="form-group col-xs-6">
-        <%= f.label :number_of_winners %>
+        <%= f.label :winners_by_group %>
         <%= f.text_field :nWinners, class: "form-control" %>
+      </div>
+
+      <div class="form-group col-xs-6">
+        <%= f.label :import_winners %>
+        <select class="form-control compselect">
+          <option value="0">No import</option>
+          <% Competition.all.order(id: :asc).each do |competition| %>
+            <% if competition.nWinners != nil && competition.nWinners > 1 %>
+            <option value="<%= competition.id %>"><%= competition.titulo %> - <%= competition.nWinners %>  winners</option>
+            <% end %>
+          <% end %>
+        </select>
+        <%= f.hidden_field :idCompImportWinners, class: "idCompImportWinners form-control" %>
       </div>
     </div>
 
@@ -198,6 +211,11 @@
       $.each(options, function(key, value) {
         $('#selectMetric').append('<option value="' + value + '">' + key + '</option>');
       });
+    });
+
+    $(".compselect").val('');
+    $('.compselect').change(function() {
+      $('.idCompImportWinners').val($(this).val());
     });
   });
 </script>

@@ -8,7 +8,6 @@ class CompetitionUser < ActiveRecord::Base
 
   mount_uploader :predicfile, PredictionUploader
 
-
   def computeScore(idcomp, iduser)
     comp = Competition.where(id: idcomp).first
     com_user = CompetitionUser.where(competition_id: idcomp, user_id: iduser).first

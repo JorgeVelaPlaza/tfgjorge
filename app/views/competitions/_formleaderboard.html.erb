@@ -1,7 +1,7 @@
 <div class="container">
 
 <h3>Leaderboard of "<%= @competition.titulo %>"</h3>
-  <div class="col-xs-11">
+  <div class="col-xs-10">
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title">Ranking of predictions submitted</h3>
@@ -27,8 +27,9 @@
             <th>Team members</th>
             <th style="width: 150px">Score</th>
           </tr>
-          <tr>
           <% inscriptions.each do |c| %>
+          <tr>
+
             <% u = User.where(:id => c.user_id).first %>
             <% a = a+1 %>
             <% if a == 1 %>
@@ -39,10 +40,11 @@
             <td><%= u.name %></td>
             <td><%= u.username %></td>
             <td>
-              <%= c.score %> %
+              <%= c.score %>
             </td>
-          <% end %>
+
           </tr>
+          <% end %>
         </table>
       </div>
       <% end %>

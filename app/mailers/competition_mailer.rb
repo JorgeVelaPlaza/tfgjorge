@@ -5,37 +5,65 @@ class CompetitionMailer < ApplicationMailer
   #
   #   en.competition_mailer.update_competition.subject
   #
-  def update_competition(id_comp)
-    #i = 1
-    @competition = Competition.find(id_comp)
-    CompetitionUser.all.each do |i|
-      @cu = CompetitionUser.find(i)
-      if @cu.competition_id == id_comp
-        @user = User.find(@cu.user_id)
-        mail( :to => @user.email, :subject => "Actualización de competición") do |format|
-            format.html
-        end
-      end
+
+  #Lógica para enviar emails de actualización de competición
+  def self.send_update_competition_email(users,competition)
+    users.each do |user|
+      update_competition(user, competition).deliver_now
     end
   end
 
-  def endCompetition(competition)
-    @competition = Competition.find(competition.id)
-    @competition.users.each do |i|
-      @user = User.find(i)
-      mail( :to => @user.email, :subject => "Fin de competición") do |format|
-            format.html
-      end
+  def update_competition(user,competition)
+    @user = user
+    @competition = competition
+    mail( :to => @user.email, :subject => "Start Competition") do |format|
+      format.html
     end
   end
 
-  def startCompetition(competition)
-    @competition = Competition.find(competition.id)
-    @competition.users.each do |i|
-      @user = User.find(i)
-      mail( :to => @user.email, :subject => "Inicio de competición") do |format|
-            format.html
-      end
+  #Lógica para enviar emails de inicio de competición (fase regular o primera fase)
+
+  def self.send_start_competition(users, competition)
+    users.each do |user|
+      startCompetition(user, competition).deliver_now
+    end
+  end
+
+  def startCompetition(user,competition)
+    @user = user
+    @competition = competition
+    mail( :to => @user.email, :subject => "Start Competition") do |format|
+      format.html
+    end
+  end
+
+  #Lógica para enviar emails de inicio de competición (fase avanzada)
+  def self.send_start_competition_plaoff(users, competition)
+    users.each do |user|
+      startCompetitionPlaoff(user, competition).deliver_now
+    end
+  end
+
+  def startCompetitionPlaoff(user,competition)
+    @user = user
+    @competition = competition
+    mail( :to => @user.email, :subject => "Start Competition (Next Round)") do |format|
+      format.html
+    end
+  end
+
+  #Lógica para enviar emails de fin de competición
+  def self.send_end_competition(users, competition)
+    users.each do |user|
+      endCompetition(user, competition).deliver_now
+    end
+  end
+
+  def endCompetition(user,competition)
+    @user = user
+    @competition = competition
+    mail( :to => @user.email, :subject => "End Competition") do |format|
+      format.html
     end
   end
 

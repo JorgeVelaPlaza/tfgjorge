@@ -21,8 +21,16 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new(competition_params)
     if @competition.save
-      @competition.delay(run_at: @competition.startdate).start_competition
-      @competition.delay(run_at: @competition.deadline).finish_competition
+      if @competition.idCompImportWinners == 0
+        if @competition.nGroups > 1
+          @competition.delay(run_at: @competition.startdate).distributed_users_in_groups
+        end
+        @competition.delay(run_at: @competition.startdate).start_competition_regular
+        @competition.delay(run_at: @competition.deadline).finish_competition
+      else
+        @competition.import_winners
+        @competition.delay(run_at: @competition.deadline).finish_competition
+      end
       flash[:notice] = "Competition successfully created"
       redirect_to competition_path(@competition)
     else
@@ -35,7 +43,7 @@ class CompetitionsController < ApplicationController
 
       #send email
       id = @competition.id
-      CompetitionMailer.update_competition(id).deliver_now
+      CompetitionMailer.send_update_competition_email(@competition.users, @competition)
 
       flash[:notice] = "Competition successfully updated"
       redirect_to competitions_path
@@ -86,7 +94,7 @@ class CompetitionsController < ApplicationController
       :deadline, :dificultad, :evaluation, :prizes, :about, :engagement,
       :resources, :timeline, :tutorial, :rules, :summary, :trainingdata,
       :testdata, :metric, :type_competition,:finished, :started, :startdate,
-      :nGroups, :nWinners)
+      :nGroups, :nWinners, :idCompImportWinners)
   end
 
   def check_for_cancel

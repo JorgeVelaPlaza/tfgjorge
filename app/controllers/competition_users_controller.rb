@@ -49,10 +49,12 @@ class CompetitionUsersController < ApplicationController
   def destroy
   end
 
+
   private
 
   def competition_user_params
-    params.require(:competition_user).permit(:competition_id, :user_id, :score, :predicfile)
+    params.require(:competition_user).permit(:competition_id, :user_id, :score,
+      :predicfile, :group)
   end
 
 

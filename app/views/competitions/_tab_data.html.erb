@@ -23,7 +23,11 @@
                   <td><%= File.basename(@competition.trainingdata.path) %></td>
                   <td><%= @competition.trainingdata.size %> Bytes</td>
                   <td>
+                  <% if !@competition.started %>
+                    <%= link_to "Download", @competition.trainingdata.url, class: "btn btn-success btn-xs disabled" %>
+                  <% else %>
                     <%= link_to "Download", @competition.trainingdata.url, class: "btn btn-success btn-xs" %>
+                  <% end %>
                   </td>
                 </tr>
 
