@@ -32,6 +32,8 @@ require "capistrano/rvm"
 require "capistrano/bundler"
 require 'capistrano/rails'
 require 'capistrano/passenger'
+require 'capistrano/delayed_job'
+
 
 # If you are using rvm add these lines:
 require 'capistrano/rvm'
