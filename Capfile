@@ -33,6 +33,7 @@ require "capistrano/bundler"
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/delayed_job'
+require 'capistrano/safe_deploy_to'
 
 
 # If you are using rvm add these lines:
