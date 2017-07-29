@@ -22,7 +22,9 @@ class Competition < ActiveRecord::Base
   mount_uploader :trainingdata, TrainingdataUploader
   mount_uploader :testdata, TestdataUploader
 
-
+  def real_winners
+    return self.nGroups*self.nWinners
+  end
   def finish_competition
     self.finished = true
     self.save
@@ -30,6 +32,7 @@ class Competition < ActiveRecord::Base
   end
 
   def start_competition_regular
+    self.distributed_users_in_groups(self.users)
     self.started = true
     self.save
     CompetitionMailer.send_start_competition(self.users, self)
@@ -42,25 +45,54 @@ class Competition < ActiveRecord::Base
   end
 
   def import_winners
-    #lista de inscripciones de la competición a importar sus ganadores
-    listEnrolls = CompetitionUser.where(competition_id: self.idCompImportWinners).order(score: :desc)
-
-    #Objeto competición para saber el nº de ganadores que tenía la competición
-    #de la cual estamos importándolos
-
-    @competitionToImport = Competition.find(self.idCompImportWinners)
 
     #lista de inscripciones resultante, con los ganadores importados ya inscritos
     listEnrollsWinners = []
 
-    #Sacar los ganadores de la competición a importar y inscribirlos en la que se está creando
-    for i in 1..@competitionToImport.nWinners
-      userId = listEnrolls[i-1].user_id
-      enrollUser = CompetitionUser.new(competition_id: self.id, user_id: userId)
-      listEnrollsWinners.push(enrollUser)
-      enrollUser.save
+    #Objeto competición para saber el nº de ganadores que tenía la competición
+    #de la cual estamos importándolos
+    @competitionToImport = Competition.find(self.idCompImportWinners)
+    n = @competitionToImport.nGroups
+    m = @competitionToImport.nWinners
+    l = listEnrolls.size
+
+    #lista de inscripciones de la competición a importar sus ganadores
+    if @competitionToImport.type_competition == "classification"
+      listEnrolls = CompetitionUser.where(competition_id: self.idCompImportWinners).order(score: :desc)
+    else
+      listEnrolls = CompetitionUser.where(competition_id: self.idCompImportWinners).order(score: :asc)
     end
 
+    #Si el número de grupos de la competición a importar es 1, se inscriben directamente
+    #los ganadores. Si no, se recorre el vector y se guardan los primeros que se
+    #encuentren de cada grupo (Por que los primeros son los que tienen mayor score,
+    #ya que están ordenados descencentemente por score)
+    if n == 1
+      #Sacamos los ganadores de la competición a importar y  los inscribimos
+      #en la que se está creando
+      for i in 1..m
+        userId = listEnrolls[i-1].user_id
+        enrollUser = CompetitionUser.new(competition_id: self.id, user_id: userId)
+        enrollUser.save
+        listEnrollsWinners.push(enrollUser)
+      end
+    else
+      (1..n).each do |i|
+        cont = 0
+        for j in 0..l-1
+          if listEnrolls[j].group == i && cont < m
+            cont += 1
+            userId = listEnrolls[j].user_id
+            enrollUser = CompetitionUser.new(competition_id: self.id, user_id: userId)
+            enrollUser.save
+            listEnrollsWinners.push(enrollUser)
+          end
+          if cont == m
+            break
+          end
+        end
+      end
+    end
     self.distribute_winners_in_groups(listEnrollsWinners)
     self.start_competition_playoff
   end
@@ -71,7 +103,7 @@ class Competition < ActiveRecord::Base
     #de competiciones
     if self.nGroups <= 1
       for i in 0..list.size-1
-        list[i].group == 1
+        list[i].group = 1
         list[i].save
       end
     else
@@ -93,24 +125,41 @@ class Competition < ActiveRecord::Base
     end
   end
 
-  def distributed_users_in_groups
-    self.started = true
-    list = CompetitionUser.where(competition_id: self.id)
-    if self.nGroups <= 1
-      for i in 0..list.size-1
-        list[i].group == 1
-        list[i].save
+
+  def distributed_users_in_groups(users)
+    @competition_users = []
+    users.each do |user|
+      @user = user
+      @competition_user = CompetitionUser.where(competition_id: self.id, user_id: @user.id).first
+      @competition_users.push(@competition_user)
+    end
+
+    n = @competition_users.size-1
+    if self.nGroups == 1
+      for i in 0..n
+        @competition_users[i].group = 1
+        @competition_users[i].save
       end
     else
-      for i in 0..list.size-1
+      i = 0
+       while (i <= n)
         for j in 0..self.nGroups-1
-          list[i+j].group == j+1
-          list[i+j].save
+          if i+j <= n
+            puts "i=#{i} , j=#{j}"
+            @competition_users[i+j].group = j+1
+            puts @competition_users[i+j].group
+            @competition_users[i+j].save
+          end
         end
-        i+self.nGroups
+        if  i+self.nGroups > n
+          i += 1
+        else
+          i += self.nGroups
+        end
       end
     end
-    self.check_unbalanced_groups(list)
+
+    self.check_unbalanced_groups(@competition_users)
 
   end
 

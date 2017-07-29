@@ -20,21 +20,33 @@ class CompetitionsController < ApplicationController
 
   def create
     @competition = Competition.new(competition_params)
-    if @competition.save
-      if @competition.idCompImportWinners == 0
-        if @competition.nGroups > 1
-          @competition.delay(run_at: @competition.startdate).distributed_users_in_groups
-        end
+
+    if @competition.idCompImportWinners == 0
+      if @competition.save
         @competition.delay(run_at: @competition.startdate).start_competition_regular
         @competition.delay(run_at: @competition.deadline).finish_competition
+        flash[:notice] = "Competition successfully created"
+        redirect_to competition_path(@competition)
       else
-        @competition.import_winners
-        @competition.delay(run_at: @competition.deadline).finish_competition
+        render 'new'
       end
-      flash[:notice] = "Competition successfully created"
-      redirect_to competition_path(@competition)
     else
-      render 'new'
+      @competitionImport = Competition.find(@competition.idCompImportWinners)
+      if @competitionImport.real_winners < @competition.real_winners
+        puts @competition.real_winners
+        puts @competitionImport.real_winners
+        flash[:danger] = "Winners to import are less than the users of the new competition"
+        render 'new'
+      else
+        if @competition.save
+          @competition.import_winners
+          @competition.delay(run_at: @competition.deadline).finish_competition
+          flash[:notice] = "Competition successfully created"
+          redirect_to competition_path(@competition)
+        else
+          render 'new'
+        end
+      end
     end
   end
 

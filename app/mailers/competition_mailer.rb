@@ -25,13 +25,15 @@ class CompetitionMailer < ApplicationMailer
 
   def self.send_start_competition(users, competition)
     users.each do |user|
-      startCompetition(user, competition).deliver_now
+      enroll = CompetitionUser.where(competition_id: competition.id, user_id: user.id).first
+      startCompetition(user, competition, enroll).deliver_now
     end
   end
 
-  def startCompetition(user,competition)
+  def startCompetition(user,competition, enroll)
     @user = user
     @competition = competition
+    @competition_user = enroll
     mail( :to => @user.email, :subject => "Start Competition") do |format|
       format.html
     end

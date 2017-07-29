@@ -1,7 +1,11 @@
-<h1>Competición Iniciada</h1>
+<h1>Competition Started!</h1>
 
-Querido <%= @user.name %>,<br>
+Dear <%= @user.name %>,<br>
 
-La competición "<b><%= @competition.titulo %></b>" ha comenzado!. Puede mandar sus predicciones a partir de este momento!. <br>
-
-¡Suerte!
+The competition "<b><%= @competition.titulo %></b>" just started!. You can send your predictions from this moment!
+ <br>
+<% if @competition.nGroups > 1 %>
+  You have been enrolled in group <b><%= @competition_user.group %></b>.
+<% end %>
+<br>
+<a href="http://82.223.30.118/competitions/<%= @competition.id %>">Get started now!</a>
