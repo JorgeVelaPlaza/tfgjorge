@@ -8,6 +8,8 @@ set :repo_url, "git@github.com:JorgeVelaPlaza/tfgjorge.git"
 set :branch, "master"
 
 set :user, "deploy"
+set :password, "Nv9ys4744V"
+
 
 
 # Default deploy_to directory is /var/www/my_app_name
