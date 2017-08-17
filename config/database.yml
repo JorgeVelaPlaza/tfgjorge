@@ -84,4 +84,4 @@ test:
 production:
   <<: *default
   database: tfgjorge_production
-  password: <%= ENV['TFGJORGE_DATABASE_PASSWORD'] %>
+  password: da065cae7862466b931060959e6c5ec4856ee81577b93862ca29d135dc0d61c5e2c616640167b47e71ddd4b4263c25ddabe96f14a5ec837b68e8d82090871b0c
