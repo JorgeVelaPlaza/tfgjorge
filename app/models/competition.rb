@@ -44,17 +44,14 @@ class Competition < ActiveRecord::Base
     CompetitionMailer.send_start_competition_plaoff(self.users, self)
   end
 
-  def import_winners
+  def import_winners(competitionToImport)
 
     #lista de inscripciones resultante, con los ganadores importados ya inscritos
     listEnrollsWinners = []
 
     #Objeto competición para saber el nº de ganadores que tenía la competición
     #de la cual estamos importándolos
-    @competitionToImport = Competition.find(self.idCompImportWinners)
-    n = @competitionToImport.nGroups
-    m = @competitionToImport.nWinners
-    l = listEnrolls.size
+    @competitionToImport = competitionToImport
 
     #lista de inscripciones de la competición a importar sus ganadores
     if @competitionToImport.type_competition == "classification"
@@ -62,6 +59,10 @@ class Competition < ActiveRecord::Base
     else
       listEnrolls = CompetitionUser.where(competition_id: self.idCompImportWinners).order(score: :asc)
     end
+
+    n = @competitionToImport.nGroups
+    m = @competitionToImport.nWinners
+    l = listEnrolls.size
 
     #Si el número de grupos de la competición a importar es 1, se inscriben directamente
     #los ganadores. Si no, se recorre el vector y se guardan los primeros que se

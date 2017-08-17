@@ -58,6 +58,10 @@ GEM
     capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-delayed-job (1.1.0)
+      capistrano (>= 3.1)
+      daemons (>= 1.1)
+      sshkit (>= 1.2.0)
     capistrano-passenger (0.2.0)
       capistrano (~> 3.0)
     capistrano-rails (1.2.3)
@@ -66,6 +70,8 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-safe-deploy-to (1.1.1)
+      capistrano (>= 3.0)
     carrierwave (1.0.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -211,9 +217,11 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.7, >= 3.7.1)
   capistrano-bundler
+  capistrano-delayed-job (~> 1.0)
   capistrano-passenger (~> 0.2.0)
   capistrano-rails (~> 1.2)
   capistrano-rvm
+  capistrano-safe-deploy-to (~> 1.1.1)
   carrierwave
   coffee-rails (~> 4.1.0)
   daemons

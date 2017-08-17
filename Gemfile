@@ -67,8 +67,8 @@ group :development do
   gem 'capistrano', '~> 3.7', '>= 3.7.1'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger', '~> 0.2.0'
-  #gem 'capistrano-delayed-job', '~> 1.0'
-  #gem 'capistrano-safe-deploy-to', '~> 1.1.1'
+  gem 'capistrano-delayed-job', '~> 1.0'
+  gem 'capistrano-safe-deploy-to', '~> 1.1.1'
 
 
   # Remove the following if your app does not use Rails

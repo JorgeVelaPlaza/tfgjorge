@@ -39,7 +39,7 @@ class CompetitionsController < ApplicationController
         render 'new'
       else
         if @competition.save
-          @competition.import_winners
+          @competition.import_winners(@competitionImport)
           @competition.delay(run_at: @competition.deadline).finish_competition
           flash[:notice] = "Competition successfully created"
           redirect_to competition_path(@competition)
@@ -80,12 +80,6 @@ class CompetitionsController < ApplicationController
 
   def discussions
 
-  end
-
-  def overview
-    respond_to do |format|
-      format.js
-    end
   end
 
   def show_topics
