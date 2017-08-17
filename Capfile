@@ -32,7 +32,7 @@ require "capistrano/rvm"
 require "capistrano/bundler"
 require 'capistrano/rails'
 require 'capistrano/passenger'
-require 'capistrano/delayed_job'
+#require 'capistrano/delayed_job'
 #require 'capistrano/safe_deploy_to'
 
 
