@@ -1,5 +1,12 @@
-<h1>This is the home page</h1>
-<%= link_to 'Competitions', competitions_path %>  |
-<%= link_to 'About', pages_about_path %> |
+<div class="jumbotron" style="text-align: center;">
+  <h1 style="font-size: 40px;">The place where you will compete with your knowledge</h1>
+  <p class="lead">This is the right place to became a data scientist or an expert of machine learning! I hope you enjoy your time on this website </p>
+  <hr class="my-4">
+  <p>Start now! Take a look to the competitions</p>
+  <p class="lead">
+    <%= link_to competitions_path, class: "btn btn-primary btn-lg" do %>
+      <i class="fa fa-flag-checkered"></i> Competitions
+    <% end %>
+  </p>
+</div>
 
-<%= link_to "Exit", destroy_user_session_path, method: :delete %>

@@ -55,9 +55,9 @@
     <%= link_to competition_users_path(:competition_id => @competition.id, :user_id => current_user.id), :method => :post, class: "btn btn-success " do %>
       <i class="fa fa-user"></i>  Enroll
     <% end %>
-    <%= link_to new_group_path(@competition.id), class: "btn btn-success" do %>
-      <i class="fa fa-group"></i>  Enroll a group
-    <% end %>
+    <%#= link_to new_group_path(@competition.id), class: "btn btn-success" do %>
+<!--       <i class="fa fa-group"></i>  Enroll a group -->
+    <%# end %>
 
     <%= link_to "Back", competitions_path, class: "btn btn-primary" %>
   <% end %>

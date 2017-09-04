@@ -1,6 +1,27 @@
-<h2 class="page-header">Perfil de <%= @user.name %></h2>
-<p><b><%= @user.username %></b></p>
 
-<!-- image_tag("/fotos_usuarios/#{@user.id}/avatar/#{@user.avatar_filename}", class: "img-circle") if @user.avatar_filename?  -->
-<%= image_tag(@user.avatar.url, class: "img-circle imgresize") if @user.avatar? %>
+<div style="padding-left: 100px;" class="container">
+<h2 class="page-header">Profile of <%= @user.name %></h2>
+
+  Username: <b><%= @user.username %></b><br>
+
+  Name: <b><%= @user.name %></b><br>
+
+  City: <b><%= @user.ciudad %></b><br>
+
+  Country: <b><%= @user.pais %></b><br>
+
+  Email: <b><%= @user.email %></b><br>
+
+  Member since: <b><%= time_ago_in_words(@user.created_at) %></b><br>
+
+  Nombre de usuario: <b><%= @user.username %></b><br>
+
+
+
+  <!-- image_tag("/fotos_usuarios/#{@user.id}/avatar/#{@user.avatar_filename}", class: "img-circle") if @user.avatar_filename?  -->
+   Avatar: <%= image_tag(@user.avatar.url, class: "img-circle imgresize") if @user.avatar? %>
+
+</div>
+
+
 

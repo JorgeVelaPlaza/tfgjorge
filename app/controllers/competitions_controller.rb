@@ -100,7 +100,7 @@ class CompetitionsController < ApplicationController
       :deadline, :dificultad, :evaluation, :prizes, :about, :engagement,
       :resources, :timeline, :tutorial, :rules, :summary, :trainingdata,
       :testdata, :metric, :type_competition,:finished, :started, :startdate,
-      :nGroups, :nWinners, :idCompImportWinners)
+      :nGroups, :nWinners, :idCompImportWinners, :avatar_competition)
   end
 
   def check_for_cancel

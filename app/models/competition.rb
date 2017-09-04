@@ -21,6 +21,9 @@ class Competition < ActiveRecord::Base
 
   mount_uploader :trainingdata, TrainingdataUploader
   mount_uploader :testdata, TestdataUploader
+  mount_uploader :avatar_competition, AvatarCompetitionUploader
+
+
 
   def real_winners
     return self.nGroups*self.nWinners

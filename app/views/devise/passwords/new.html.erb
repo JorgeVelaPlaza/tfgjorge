@@ -1,16 +1,34 @@
-<h2>Forgot your password?</h2>
+<html>
+<body class="body">
+<%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class="login-box">
+  <div class="login-logo">
+    <a><b>App</b>TFG</a>
   </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg"><h2>Forgot your password?</h2></p>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|  %>
+      <div class="form-group has-feedback">
+        <%= f.email_field :email, autofocus: true, placeholder: "Email",type: "email", class: "form-control" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+
+      <div class="row">
+        <div class="actions col-xs-12">
+          <%= f.submit "Send me reset password instructions", class: "btn btn-primary btn-block btn-flat" %>
+        </div>
+      </div>
+
+    <% end %>
+    <br>
+    <%= render "devise/shared/links" %>
   </div>
-<% end %>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+</body>
 
-<%= render "devise/shared/links" %>
+</html>

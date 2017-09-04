@@ -30,7 +30,11 @@
         <ul class="products-list product-list-in-box">
           <li class="item">
             <div class="col-xs-2 product-img">
-              <img alt="Comp Image">
+              <% if competition.avatar_competition? %>
+                <%= image_tag competition.avatar_competition.url%>
+              <% else %>
+                <img alt="Comp Image">
+              <% end %>
             </div>
             <div class="col-xs-6 product-info">
               <b><h4><%= link_to competition.titulo, competition_path(competition), class: "product-title" %></h4></b>
