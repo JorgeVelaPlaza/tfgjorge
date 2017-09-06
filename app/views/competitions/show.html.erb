@@ -21,7 +21,7 @@
   <li id="more" role="presentation">
     <%= link_to "More", "#more", :remote => true, html_options = "data-toggle" => "pill" %>
   </li>
-  <% if c == nil || !@competition.started %>
+  <% if c == nil %>
     <%= button_tag "", class: "btn btn-flat btn-success pull-right disabled", style: "height: 41px; color: white;" do %>
       <i class="fa fa-send-o"></i>  Submit Prediction
     <% end %>
@@ -44,6 +44,10 @@
   <%= render '/competitions/tab_overview' %>
 </div>
 
+
+</div>
+
+<div class="col-xs-3">
 <% if current_user.admin? %>
   <%= link_to "Update this competition", edit_competition_path(@competition), class: "btn bg-orange" %>
   <%= link_to " Back", competitions_path, class: "btn btn-primary" %>
@@ -62,4 +66,14 @@
     <%= link_to "Back", competitions_path, class: "btn btn-primary" %>
   <% end %>
 <% end %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 </div>
+<br>
+<br>
+
